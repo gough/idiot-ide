@@ -8,17 +8,12 @@ import java.awt.event.ActionListener;
 import java.security.Key;
 import javax.swing.JOptionPane;
 
-public class GUI implements ActionListener {
+public class GUI extends JFrame implements ActionListener {
     public GUI(String title, int width, int height) {
         initGUI(title);
     }
     
     public void initGUI(String title) {
-        JFrame frame = new JFrame();
-        JPanel panel = new JPanel();
-
-        // ---------- //
-
         JMenuBar menuBar = new JMenuBar();
 
             JMenu fileMenu = new JMenu("File");
@@ -166,18 +161,21 @@ public class GUI implements ActionListener {
 
         // ---------- //
 
+        // add everything to a panel so we can use keyboard shortcuts
+        JPanel panel = new JPanel();
         panel.add(mainSplitPane);
 
-        frame.add(panel);
+        add(panel);
 
-        frame.setJMenuBar(menuBar);
-        frame.add(toolBar, BorderLayout.NORTH);
+        // add menuBar and toolBar to frame
+        setJMenuBar(menuBar);
+        add(toolBar, BorderLayout.NORTH);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setMinimumSize(new Dimension(800, 600));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setMinimumSize(new Dimension(800, 600));
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
