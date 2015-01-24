@@ -187,16 +187,17 @@ public class GUI implements ActionListener {
         }
 
         if (action.equals("help")) {
-            JOptionPane.showMessageDialog(null, "Version 1.0 \n" +
-                    "Created By: \n" +
-                    "Ben Potter, \n" +
-                    "Adam Gough, \n" +
-                    "Keylan Norum, \n" +
-                    "Kaori Millar, \n" +
-                    "Kuan Heng Kuo \n" +
-                    "Icons provided by: \n" +
-                    "http://www.famfamfam.com/lab/icons/silk/");
-
+            JOptionPane.showMessageDialog(null,
+                "Version 1.0 \n" +
+                "Created By: \n" +
+                "Ben Potter, \n" +
+                "Adam Gough, \n" +
+                "Keylan Norum, \n" +
+                "Kaori Millar, \n" +
+                "Kuan Heng Kuo \n" +
+                "Icons provided by: \n" +
+                "http://www.famfamfam.com/lab/icons/silk/"
+            );
         }
     }
 }
