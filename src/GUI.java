@@ -2,11 +2,24 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
+import java.security.Key;
+import javax.swing.JOptionPane;
 
-public class GUI {
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Idiot IDE");
+public class GUI implements ActionListener {
+    public GUI(String title, int width, int height) {
+        initGUI(title);
+    }
+    
+    public void initGUI(String title) {
+        JFrame frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel panel = new JPanel();
+        panel.getInputMap().put(KeyStroke.getKeyStroke("F2"), "new");
+        //panel.getActionMap().put(this, "new");
 
         JEditorPane filePane = new JEditorPane();
         filePane.setBorder(new TitledBorder("Files"));
@@ -39,24 +52,36 @@ public class GUI {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu fileMenu = new JMenu("File");
-        JMenuItem newMenuItem = new JMenuItem("New...");
-        JMenuItem openMenuItem = new JMenuItem("Open...");
-        JMenuItem saveMenuItem = new JMenuItem("Save...");
-        JMenuItem saveAsMenuItem = new JMenuItem("Save As...");
-        JMenuItem printMenuItem = new JMenuItem("Print...");
-        JMenuItem exitMenuItem = new JMenuItem("Exit");
+        JMenuItem newMenuItem = new JMenuItem("New");
+        newMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+        newMenuItem.setActionCommand("new");
+        newMenuItem.addActionListener(this);
+        JMenuItem openMenuItem = new JMenuItem("Open");
+        openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+        JMenuItem saveMenuItem = new JMenuItem("Save");
+        saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+        JMenuItem saveAsMenuItem = new JMenuItem("Save As");
+        saveAsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
+        JMenuItem printMenuItem = new JMenuItem("Print");
+        printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
+        JMenuItem quitMenuItem = new JMenuItem("Quit");
+        quitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
         fileMenu.add(newMenuItem);
         fileMenu.add(openMenuItem);
         fileMenu.add(saveMenuItem);
         fileMenu.add(saveAsMenuItem);
         fileMenu.add(printMenuItem);
-        fileMenu.add(exitMenuItem);
+        fileMenu.add(quitMenuItem);
 
         JMenu editMenu = new JMenu("Edit");
         JMenuItem cutMenuItem = new JMenuItem("Cut");
+        cutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
         JMenuItem copyMenuItem = new JMenuItem("Copy");
+        copyMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
         JMenuItem pasteMenuItem = new JMenuItem("Paste");
+        pasteMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
         JMenuItem selectAllMenuItem = new JMenuItem("Select All");
+        selectAllMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
         editMenu.add(cutMenuItem);
         editMenu.add(copyMenuItem);
         editMenu.add(pasteMenuItem);
@@ -64,7 +89,9 @@ public class GUI {
 
         JMenu helpMenu = new JMenu("Help");
         JMenuItem viewHelpMenuItem = new JMenuItem("View Help");
+        viewHelpMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
         JMenuItem aboutMenuItem = new JMenuItem("About my IDE");
+        aboutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
         helpMenu.add(viewHelpMenuItem);
         helpMenu.add(aboutMenuItem);
 
@@ -111,7 +138,10 @@ public class GUI {
         menuBar.add(editMenu);
         menuBar.add(helpMenu);
 
-        frame.add(splitPane1);
+        panel.add(splitPane1);
+        panel.setSize(new Dimension(800, 600));
+        frame.add(panel);
+
         frame.setJMenuBar(menuBar);
         frame.add(toolBar, BorderLayout.NORTH);
 
@@ -119,6 +149,14 @@ public class GUI {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String action = e.getActionCommand();
+        if (action.equals("new")) {
+            JOptionPane.showMessageDialog(null, "test");
+            String action2 = e.getActionCommand();
+        }
     }
 }
 
