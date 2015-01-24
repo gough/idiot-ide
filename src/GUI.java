@@ -10,10 +10,28 @@ import javax.swing.JOptionPane;
 
 public class GUI extends JFrame implements ActionListener {
     public GUI(String title, int width, int height) {
-        initGUI(title);
+        // call JFrame constructor to create frame with our title
+        super(title);
+        
+        // set frame menuBar
+        setJMenuBar(makeMenuBar());
+        
+        // add toolBar to frame and set to top of frame
+        add(makeToolBar(), BorderLayout.NORTH);
+        
+        // add mainPanel and all related elements to frame
+        add(makeMainPanel());
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setMinimumSize(new Dimension(width, height));
+        pack();
+        setLocationRelativeTo(null);
+        
+        // finally, display frame
+        setVisible(true);
     }
     
-    public void initGUI(String title) {
+    public JMenuBar makeMenuBar() {
         JMenuBar menuBar = new JMenuBar();
 
             JMenu fileMenu = new JMenu("File");
@@ -79,9 +97,11 @@ public class GUI extends JFrame implements ActionListener {
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
         menuBar.add(helpMenu);
-
-        // ---------- //
-
+        
+        return menuBar;
+    }
+    
+    public JToolBar makeToolBar() {
         JToolBar toolBar = new JToolBar();
 
             JButton newToolBarButton = new JButton("New");
@@ -114,9 +134,11 @@ public class GUI extends JFrame implements ActionListener {
         toolBar.add(copyToolBarButton);
         toolBar.add(pasteToolBarButton);
         toolBar.add(runToolBarButton);
-
-        // ---------- //
-
+        
+        return toolBar;
+    }
+    
+    public JPanel makeMainPanel() {
         JSplitPane mainSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
             // leftSplitPane currently contains the file browser
@@ -159,23 +181,11 @@ public class GUI extends JFrame implements ActionListener {
         mainSplitPane.add(leftSplitPane);
         mainSplitPane.add(rightSplitPane);
 
-        // ---------- //
-
         // add everything to a panel so we can use keyboard shortcuts
         JPanel panel = new JPanel();
         panel.add(mainSplitPane);
-
-        add(panel);
-
-        // add menuBar and toolBar to frame
-        setJMenuBar(menuBar);
-        add(toolBar, BorderLayout.NORTH);
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(800, 600));
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
+        
+        return panel;
     }
 
     public void actionPerformed(ActionEvent e) {

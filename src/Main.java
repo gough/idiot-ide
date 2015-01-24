@@ -3,7 +3,7 @@ public class Main {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                GUI gui = new GUI("title", 300, 300);
+                GUI gui = new GUI("IDIOT IDE", 800, 600);
             }
         });
         
