@@ -91,6 +91,8 @@ public class GUI implements ActionListener {
         JMenuItem viewHelpMenuItem = new JMenuItem("View Help");
         viewHelpMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
         JMenuItem aboutMenuItem = new JMenuItem("About my IDE");
+        aboutMenuItem.setActionCommand("help");
+        aboutMenuItem.addActionListener(this);
         aboutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
         helpMenu.add(viewHelpMenuItem);
         helpMenu.add(aboutMenuItem);
@@ -156,6 +158,19 @@ public class GUI implements ActionListener {
         if (action.equals("new")) {
             JOptionPane.showMessageDialog(null, "test");
             String action2 = e.getActionCommand();
+        }
+
+        if (action.equals("help")) {
+            JOptionPane.showMessageDialog(null, "Version 1.0 \n" +
+                    "Created By: \n" +
+                    "Ben Potter, \n" +
+                    "Adam Gough, \n" +
+                    "Keylan Norum, \n" +
+                    "Kaori Millar, \n" +
+                    "Kuan Heng Kuo \n" +
+                    "Icons provided by: \n" +
+                    "http://www.famfamfam.com/lab/icons/silk/");
+
         }
     }
 }
