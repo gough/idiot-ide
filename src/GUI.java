@@ -184,7 +184,6 @@ public class GUI implements ActionListener {
         String action = e.getActionCommand();
         if (action.equals("new")) {
             JOptionPane.showMessageDialog(null, "test");
-            String action2 = e.getActionCommand();
         }
 
         if (action.equals("help")) {
