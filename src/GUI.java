@@ -1,5 +1,4 @@
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionEvent;
@@ -14,13 +13,13 @@ public class GUI extends JFrame implements ActionListener {
         super(title);
         
         // set frame menuBar
-        setJMenuBar(makeMenuBar());
+        addMenuBarToPane();
         
         // add toolBar to frame and set to top of frame
-        add(makeToolBar(), BorderLayout.NORTH);
+        addToolBarToPane(this.getContentPane());
         
-        // add mainPanel and all related elements to frame
-        add(makeMainPanel());
+        // add remaining components to frame
+        addComponentsToPane(this.getContentPane());
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(width, height));
@@ -31,7 +30,7 @@ public class GUI extends JFrame implements ActionListener {
         setVisible(true);
     }
     
-    public JMenuBar makeMenuBar() {
+    public void addMenuBarToPane() {
         JMenuBar menuBar = new JMenuBar();
 
             JMenu fileMenu = new JMenu("File");
@@ -98,10 +97,10 @@ public class GUI extends JFrame implements ActionListener {
         menuBar.add(editMenu);
         menuBar.add(helpMenu);
         
-        return menuBar;
+        this.setJMenuBar(menuBar);
     }
     
-    public JToolBar makeToolBar() {
+    public void addToolBarToPane(Container pane) {
         JToolBar toolBar = new JToolBar();
 
             JButton newToolBarButton = new JButton("New");
@@ -135,10 +134,10 @@ public class GUI extends JFrame implements ActionListener {
         toolBar.add(pasteToolBarButton);
         toolBar.add(runToolBarButton);
         
-        return toolBar;
+        pane.add(toolBar, BorderLayout.NORTH);
     }
     
-    public JPanel makeMainPanel() {
+    public void addComponentsToPane(Container pane) {
         JSplitPane mainSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
             // leftSplitPane currently contains the file browser
@@ -180,12 +179,8 @@ public class GUI extends JFrame implements ActionListener {
 
         mainSplitPane.add(leftSplitPane);
         mainSplitPane.add(rightSplitPane);
-
-        // add everything to a panel so we can use keyboard shortcuts
-        JPanel panel = new JPanel();
-        panel.add(mainSplitPane);
         
-        return panel;
+        pane.add(mainSplitPane);
     }
 
     public void actionPerformed(ActionEvent e) {
