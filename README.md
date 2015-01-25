@@ -10,7 +10,7 @@ The team for this project is currently:
 *   Adam Gough (me)
 *   Keylan Norum
 *   Kaori Millar
-*   Kuan Heng Kuo
+*   Linus Kuo
 
 ## Compiling
 
