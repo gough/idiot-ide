@@ -7,7 +7,7 @@ IDIOT IDE is an IDE ([integrated development environment](http://en.wikipedia.or
 The team for this project is currently:
 
 *   Ben Potter
-*   Adam Gough
+*   Adam Gough (me)
 *   Keylan Norum
 *   Kaori Millar
 *   Kuan Heng Kuo
