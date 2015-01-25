@@ -37,21 +37,33 @@ public class GUI extends JFrame implements ActionListener {
 
                 JMenuItem newMenuItem = new JMenuItem("New");
                 newMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+                newMenuItem.addActionListener(this);
+                newMenuItem.setActionCommand("file_new");
 
                 JMenuItem openMenuItem = new JMenuItem("Open");
                 openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+                openMenuItem.addActionListener(this);
+                openMenuItem.setActionCommand("file_open");
 
                 JMenuItem saveMenuItem = new JMenuItem("Save");
                 saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+                saveMenuItem.addActionListener(this);
+                saveMenuItem.setActionCommand("file_save");
 
                 JMenuItem saveAsMenuItem = new JMenuItem("Save As");
                 saveAsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
+                saveAsMenuItem.addActionListener(this);
+                saveAsMenuItem.setActionCommand("file_saveAs");
 
                 JMenuItem printMenuItem = new JMenuItem("Print");
                 printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
+                printMenuItem.addActionListener(this);
+                printMenuItem.setActionCommand("file_print");
 
                 JMenuItem quitMenuItem = new JMenuItem("Quit");
                 quitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
+                quitMenuItem.addActionListener(this);
+                quitMenuItem.setActionCommand("file_quit");
 
             fileMenu.add(newMenuItem);
             fileMenu.add(openMenuItem);
@@ -66,15 +78,23 @@ public class GUI extends JFrame implements ActionListener {
 
                 JMenuItem cutMenuItem = new JMenuItem("Cut");
                 cutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
+                cutMenuItem.addActionListener(this);
+                cutMenuItem.setActionCommand("edit_cut");
 
                 JMenuItem copyMenuItem = new JMenuItem("Copy");
                 copyMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
+                copyMenuItem.addActionListener(this);
+                copyMenuItem.setActionCommand("edit_copy");
 
                 JMenuItem pasteMenuItem = new JMenuItem("Paste");
                 pasteMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
-
+                pasteMenuItem.addActionListener(this);
+                pasteMenuItem.setActionCommand("edit_paste");
+        
                 JMenuItem selectAllMenuItem = new JMenuItem("Select All");
                 selectAllMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
+                selectAllMenuItem.addActionListener(this);
+                selectAllMenuItem.setActionCommand("edit_selectAll");
 
             editMenu.add(cutMenuItem);
             editMenu.add(copyMenuItem);
@@ -86,9 +106,13 @@ public class GUI extends JFrame implements ActionListener {
 
                 JMenuItem viewHelpMenuItem = new JMenuItem("View Help");
                 viewHelpMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
+                viewHelpMenuItem.addActionListener(this);
+                viewHelpMenuItem.setActionCommand("help_viewHelp");
 
                 JMenuItem aboutMenuItem = new JMenuItem("About My IDE");
                 aboutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
+                aboutMenuItem.addActionListener(this);
+                aboutMenuItem.setActionCommand("help_about");
 
             helpMenu.add(viewHelpMenuItem);
             helpMenu.add(aboutMenuItem);
@@ -104,22 +128,36 @@ public class GUI extends JFrame implements ActionListener {
         JToolBar toolBar = new JToolBar();
 
             JButton newToolBarButton = new JButton("New");
+            newToolBarButton.addActionListener(this);
+            newToolBarButton.setActionCommand("file_new");
 
             JButton openToolBarButton = new JButton("Open");
+            openToolBarButton.addActionListener(this);
+            openToolBarButton.setActionCommand("file_open");
 
             JButton saveToolBarButton = new JButton("Save");
+            saveToolBarButton.addActionListener(this);
+            saveToolBarButton.setActionCommand("file_save");
 
             JButton saveAsToolBarButton = new JButton("Save As");
-
-            JButton closeToolBarButton = new JButton("Close");
+            saveAsToolBarButton.addActionListener(this);
+            saveAsToolBarButton.setActionCommand("file_saveAs");
 
             JButton printToolBarButton = new JButton("Print");
+            printToolBarButton.addActionListener(this);
+            printToolBarButton.setActionCommand("file_print");
 
             JButton cutToolBarButton = new JButton("Cut");
+            cutToolBarButton.addActionListener(this);
+            cutToolBarButton.setActionCommand("edit_cut");
 
             JButton copyToolBarButton = new JButton("Copy");
+            copyToolBarButton.addActionListener(this);
+            copyToolBarButton.setActionCommand("edit_copy");
 
             JButton pasteToolBarButton = new JButton("Paste");
+            pasteToolBarButton.addActionListener(this);
+            pasteToolBarButton.setActionCommand("edit_paste");
 
             JButton runToolBarButton = new JButton("Run");
 
@@ -127,7 +165,6 @@ public class GUI extends JFrame implements ActionListener {
         toolBar.add(openToolBarButton);
         toolBar.add(saveToolBarButton);
         toolBar.add(saveAsToolBarButton);
-        toolBar.add(closeToolBarButton);
         toolBar.add(printToolBarButton);
         toolBar.add(cutToolBarButton);
         toolBar.add(copyToolBarButton);
@@ -185,11 +222,34 @@ public class GUI extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
-        if (action.equals("new")) {
-            JOptionPane.showMessageDialog(null, "test");
+        
+        if (action.equals("file_new")) {
+            JOptionPane.showMessageDialog(null, "file_new");
+        } else if (action.equals("file_open")) {
+            JOptionPane.showMessageDialog(null, "file_open");
+        } else if (action.equals("file_save")) {
+            JOptionPane.showMessageDialog(null, "file_save");
+        } else if (action.equals("file_saveAs")) {
+            JOptionPane.showMessageDialog(null, "file_saveAs");
+        } else if (action.equals("file_print")) {
+            JOptionPane.showMessageDialog(null, "file_print");
+        } else if (action.equals("file_quit")) {
+            JOptionPane.showMessageDialog(null, "file_quit");
         }
-
-        if (action.equals("help")) {
+        
+        if (action.equals("edit_cut")) {
+            JOptionPane.showMessageDialog(null, "edit_cut");
+        } else if (action.equals("edit_copy")) {
+            JOptionPane.showMessageDialog(null, "edit_copy");
+        } else if (action.equals("edit_paste")) {
+            JOptionPane.showMessageDialog(null, "edit_paste");
+        } else if (action.equals("edit_selectAll")) {
+            JOptionPane.showMessageDialog(null, "edit_selectAll");
+        }
+        
+        if (action.equals("help_viewHelp")) {
+            JOptionPane.showMessageDialog(null, "help_viewHelp");
+        } else if (action.equals("help_about")) {
             JOptionPane.showMessageDialog(null,
                 "Version 1.0 \n" +
                 "Created By: \n" +
