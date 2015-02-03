@@ -4,10 +4,16 @@ import javax.swing.border.TitledBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterJob;
+import java.io.File;
+import java.io.IOException;
 import java.security.Key;
 import javax.swing.JOptionPane;
 
 public class GUI extends JFrame implements ActionListener {
+    private Editor editor = null;
+    private JFileChooser fileChooser = new JFileChooser();
+
     public GUI(String title, int width, int height) {
         // call JFrame constructor to create frame with our title
         super(title);
@@ -183,24 +189,15 @@ public class GUI extends JFrame implements ActionListener {
                 JEditorPane filePane = new JEditorPane();
                 JScrollPane fileScrollPane = new JScrollPane(filePane);
 
+
             leftSplitPane.add(fileScrollPane);
+            leftSplitPane.setPreferredSize(new Dimension(200, 0));
 
             // rightSplitPane currently contains two tabbed panes for editing files and output
             JSplitPane rightSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 
-                JTabbedPane topTabbedPane = new JTabbedPane();
-
-                    // TODO: real tabbed file editor
-
-                    // JEditorPane(s) used as a placeholder, could be changed in future
-                    JEditorPane file1 = new JEditorPane();
-                    JScrollPane file1ScrollPane = new JScrollPane(file1);
-
-                    JEditorPane file2 = new JEditorPane();
-                    JScrollPane file2ScrollPane = new JScrollPane(file2);
-
-                topTabbedPane.add(file1ScrollPane, "file1.idiot");
-                topTabbedPane.add(file2ScrollPane, "file2.idiot");
+                this.editor = new Editor();
+                this.editor.setPreferredSize(new Dimension(0, 400));
 
                 JTabbedPane bottomTabbedPane = new JTabbedPane();
 
@@ -211,7 +208,7 @@ public class GUI extends JFrame implements ActionListener {
                 bottomTabbedPane.add(consolePane, "Console");
                 bottomTabbedPane.add(errorPane, "Errors");
 
-            rightSplitPane.add(topTabbedPane);
+            rightSplitPane.add(this.editor);
             rightSplitPane.add(bottomTabbedPane);
 
         mainSplitPane.add(leftSplitPane);
@@ -224,17 +221,39 @@ public class GUI extends JFrame implements ActionListener {
         String action = e.getActionCommand();
         
         if (action.equals("file_new")) {
-            JOptionPane.showMessageDialog(null, "file_new");
+            String title = "";
+            while (title.length() < 1) {
+                title = JOptionPane.showInputDialog("Enter a new file name:");
+            }
+
+            this.editor.newTab(title + ".idiot");
         } else if (action.equals("file_open")) {
-            JOptionPane.showMessageDialog(null, "file_open");
+            int returnValue = this.fileChooser.showOpenDialog(null);
+
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File file = new File(String.valueOf(this.fileChooser.getSelectedFile()));
+                System.out.println(file);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error opening file");
+            }
         } else if (action.equals("file_save")) {
             JOptionPane.showMessageDialog(null, "file_save");
         } else if (action.equals("file_saveAs")) {
-            JOptionPane.showMessageDialog(null, "file_saveAs");
+            int returnValue = this.fileChooser.showSaveDialog(null);
+
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File file = new File(String.valueOf(this.fileChooser.getSelectedFile()));
+                System.out.println(file);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error saving file");
+            }
         } else if (action.equals("file_print")) {
-            JOptionPane.showMessageDialog(null, "file_print");
+            // TODO: get printing working
+            PrinterJob printerJob = PrinterJob.getPrinterJob();
+            printerJob.printDialog();
         } else if (action.equals("file_quit")) {
-            JOptionPane.showMessageDialog(null, "file_quit");
+            // TODO: ask to save file
+            System.exit(0);
         }
         
         if (action.equals("edit_cut")) {
