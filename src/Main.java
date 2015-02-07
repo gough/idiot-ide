@@ -6,6 +6,6 @@ public class Main {
                 GUI gui = new GUI("IDIOT IDE", 800, 600);
             }
         });
-        
+
     }
 }

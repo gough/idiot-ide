@@ -7,6 +7,7 @@ import java.awt.print.PrinterJob;
 import java.io.*;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.DefaultEditorKit;
 
 public class GUI extends JFrame implements ActionListener {
     private Editor editor = null;
@@ -80,17 +81,20 @@ public class GUI extends JFrame implements ActionListener {
 
             JMenu editMenu = new JMenu("Edit");
 
-                JMenuItem cutMenuItem = new JMenuItem("Cut");
+                JMenuItem cutMenuItem = new JMenuItem(new DefaultEditorKit.CutAction());
+                cutMenuItem.setText("Cut");
                 cutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
                 cutMenuItem.addActionListener(this);
                 cutMenuItem.setActionCommand("edit_cut");
 
-                JMenuItem copyMenuItem = new JMenuItem("Copy");
+                JMenuItem copyMenuItem = new JMenuItem(new DefaultEditorKit.CopyAction());
+                copyMenuItem.setText("Copy");
                 copyMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
                 copyMenuItem.addActionListener(this);
                 copyMenuItem.setActionCommand("edit_copy");
 
-                JMenuItem pasteMenuItem = new JMenuItem("Paste");
+                JMenuItem pasteMenuItem = new JMenuItem(new DefaultEditorKit.PasteAction());
+                pasteMenuItem.setText("Paste");
                 pasteMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
                 pasteMenuItem.addActionListener(this);
                 pasteMenuItem.setActionCommand("edit_paste");
@@ -151,15 +155,18 @@ public class GUI extends JFrame implements ActionListener {
             printToolBarButton.addActionListener(this);
             printToolBarButton.setActionCommand("file_print");
 
-            JButton cutToolBarButton = new JButton("Cut");
+            JButton cutToolBarButton = new JButton(new DefaultEditorKit.CutAction());
+            cutToolBarButton.setText("Cut");
             cutToolBarButton.addActionListener(this);
             cutToolBarButton.setActionCommand("edit_cut");
 
-            JButton copyToolBarButton = new JButton("Copy");
+            JButton copyToolBarButton = new JButton(new DefaultEditorKit.CopyAction());
+            copyToolBarButton.setText("Copy");
             copyToolBarButton.addActionListener(this);
             copyToolBarButton.setActionCommand("edit_copy");
 
-            JButton pasteToolBarButton = new JButton("Paste");
+            JButton pasteToolBarButton = new JButton(new DefaultEditorKit.PasteAction());
+            pasteToolBarButton.setText("Paste");
             pasteToolBarButton.addActionListener(this);
             pasteToolBarButton.setActionCommand("edit_paste");
 
@@ -277,11 +284,8 @@ public class GUI extends JFrame implements ActionListener {
         }
         
         if (action.equals("edit_cut")) {
-            JOptionPane.showMessageDialog(null, "edit_cut");
         } else if (action.equals("edit_copy")) {
-            JOptionPane.showMessageDialog(null, "edit_copy");
         } else if (action.equals("edit_paste")) {
-            JOptionPane.showMessageDialog(null, "edit_paste");
         } else if (action.equals("edit_selectAll")) {
             JOptionPane.showMessageDialog(null, "edit_selectAll");
         }
