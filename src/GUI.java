@@ -5,10 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterJob;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.security.Key;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class GUI extends JFrame implements ActionListener {
     private Editor editor = null;
@@ -226,15 +226,37 @@ public class GUI extends JFrame implements ActionListener {
             String title = "";
             while (title.length() < 1) {
                 title = JOptionPane.showInputDialog("Enter a new file name:");
+                if (title.length() < 1) {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid file name.");
+                }
             }
 
             this.editor.newTab(title + ".idiot");
         } else if (action.equals("file_open")) {
+            this.fileChooser.setFileFilter(new FileNameExtensionFilter("IDIOT", "idiot"));
+            
             int returnValue = this.fileChooser.showOpenDialog(null);
-
+            String filePath = String.valueOf(this.fileChooser.getSelectedFile());
             if (returnValue == JFileChooser.APPROVE_OPTION) {
-                File file = new File(String.valueOf(this.fileChooser.getSelectedFile()));
-                System.out.println(file);
+                File file = new File(filePath);
+                String fileContents = "";
+                
+                try {
+                    BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+                    
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        fileContents = fileContents + line + "\n";
+                    }
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                
+                this.editor.newTab(filePath.split("/")[filePath.split("/").length - 1]);
+                this.editor.getLastTab().setText(fileContents);
+            } else if (returnValue == JFileChooser.CANCEL_OPTION) {
             } else {
                 JOptionPane.showMessageDialog(null, "Error opening file");
             }
@@ -246,8 +268,6 @@ public class GUI extends JFrame implements ActionListener {
             if (returnValue == JFileChooser.APPROVE_OPTION) {
                 File file = new File(String.valueOf(this.fileChooser.getSelectedFile()));
                 System.out.println(file);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error saving file");
             }
         } else if (action.equals("file_print")) {
             // TODO: get printing working
