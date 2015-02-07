@@ -189,9 +189,8 @@ public class GUI extends JFrame implements ActionListener {
                 JEditorPane filePane = new JEditorPane();
                 JScrollPane fileScrollPane = new JScrollPane(filePane);
 
-
             leftSplitPane.add(fileScrollPane);
-            leftSplitPane.setPreferredSize(new Dimension(200, 0));
+            leftSplitPane.setMinimumSize(new Dimension(0, 0));
 
             // rightSplitPane currently contains two tabbed panes for editing files and output
             JSplitPane rightSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
@@ -210,9 +209,12 @@ public class GUI extends JFrame implements ActionListener {
 
             rightSplitPane.add(this.editor);
             rightSplitPane.add(bottomTabbedPane);
+            rightSplitPane.setMinimumSize(new Dimension(0, 0));
+            rightSplitPane.setOneTouchExpandable(true);
 
         mainSplitPane.add(leftSplitPane);
         mainSplitPane.add(rightSplitPane);
+        mainSplitPane.setOneTouchExpandable(true);
         
         pane.add(mainSplitPane);
     }
