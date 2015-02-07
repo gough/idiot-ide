@@ -1,12 +1,10 @@
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterJob;
 import java.io.*;
-import java.security.Key;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
