@@ -42,31 +42,37 @@ public class GUI extends JFrame implements ActionListener {
 
                 JMenuItem newMenuItem = new JMenuItem("New");
                 newMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+                newMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/page_add.png")));
                 newMenuItem.addActionListener(this);
                 newMenuItem.setActionCommand("file_new");
 
                 JMenuItem openMenuItem = new JMenuItem("Open");
                 openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+                openMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/folder_page.png")));
                 openMenuItem.addActionListener(this);
                 openMenuItem.setActionCommand("file_open");
 
                 JMenuItem saveMenuItem = new JMenuItem("Save");
                 saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+                saveMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/disk.png")));
                 saveMenuItem.addActionListener(this);
                 saveMenuItem.setActionCommand("file_save");
 
                 JMenuItem saveAsMenuItem = new JMenuItem("Save As");
                 saveAsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
+                saveAsMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/page_save.png")));
                 saveAsMenuItem.addActionListener(this);
                 saveAsMenuItem.setActionCommand("file_saveAs");
 
                 JMenuItem printMenuItem = new JMenuItem("Print");
                 printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
+                printMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/printer.png")));
                 printMenuItem.addActionListener(this);
                 printMenuItem.setActionCommand("file_print");
 
                 JMenuItem quitMenuItem = new JMenuItem("Quit");
                 quitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
+                quitMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/cross.png")));
                 quitMenuItem.addActionListener(this);
                 quitMenuItem.setActionCommand("file_quit");
 
@@ -84,18 +90,21 @@ public class GUI extends JFrame implements ActionListener {
                 JMenuItem cutMenuItem = new JMenuItem(new DefaultEditorKit.CutAction());
                 cutMenuItem.setText("Cut");
                 cutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
+                cutMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/cut.png")));
                 cutMenuItem.addActionListener(this);
                 cutMenuItem.setActionCommand("edit_cut");
 
                 JMenuItem copyMenuItem = new JMenuItem(new DefaultEditorKit.CopyAction());
                 copyMenuItem.setText("Copy");
                 copyMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
+                copyMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/page_copy.png")));
                 copyMenuItem.addActionListener(this);
                 copyMenuItem.setActionCommand("edit_copy");
 
                 JMenuItem pasteMenuItem = new JMenuItem(new DefaultEditorKit.PasteAction());
                 pasteMenuItem.setText("Paste");
                 pasteMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
+                pasteMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/page_paste.png")));
                 pasteMenuItem.addActionListener(this);
                 pasteMenuItem.setActionCommand("edit_paste");
         
@@ -114,11 +123,13 @@ public class GUI extends JFrame implements ActionListener {
 
                 JMenuItem viewHelpMenuItem = new JMenuItem("View Help");
                 viewHelpMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
+                viewHelpMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/help.png")));
                 viewHelpMenuItem.addActionListener(this);
                 viewHelpMenuItem.setActionCommand("help_viewHelp");
 
                 JMenuItem aboutMenuItem = new JMenuItem("About My IDE");
                 aboutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
+                aboutMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/information.png")));
                 aboutMenuItem.addActionListener(this);
                 aboutMenuItem.setActionCommand("help_about");
 
