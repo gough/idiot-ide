@@ -136,41 +136,50 @@ public class GUI extends JFrame implements ActionListener {
         JToolBar toolBar = new JToolBar();
 
             JButton newToolBarButton = new JButton("New");
+            newToolBarButton.setIcon(new ImageIcon(getClass().getResource("icons/page_add.png")));
             newToolBarButton.addActionListener(this);
             newToolBarButton.setActionCommand("file_new");
 
             JButton openToolBarButton = new JButton("Open");
+            openToolBarButton.setIcon(new ImageIcon(getClass().getResource("icons/folder_page.png")));
             openToolBarButton.addActionListener(this);
             openToolBarButton.setActionCommand("file_open");
 
             JButton saveToolBarButton = new JButton("Save");
+            saveToolBarButton.setIcon(new ImageIcon(getClass().getResource("icons/disk.png")));
             saveToolBarButton.addActionListener(this);
             saveToolBarButton.setActionCommand("file_save");
 
             JButton saveAsToolBarButton = new JButton("Save As");
+            saveAsToolBarButton.setIcon(new ImageIcon(getClass().getResource("icons/page_save.png")));
             saveAsToolBarButton.addActionListener(this);
             saveAsToolBarButton.setActionCommand("file_saveAs");
 
             JButton printToolBarButton = new JButton("Print");
+            printToolBarButton.setIcon(new ImageIcon(getClass().getResource("icons/printer.png")));
             printToolBarButton.addActionListener(this);
             printToolBarButton.setActionCommand("file_print");
 
             JButton cutToolBarButton = new JButton(new DefaultEditorKit.CutAction());
             cutToolBarButton.setText("Cut");
+            cutToolBarButton.setIcon(new ImageIcon(getClass().getResource("icons/cut.png")));
             cutToolBarButton.addActionListener(this);
             cutToolBarButton.setActionCommand("edit_cut");
 
             JButton copyToolBarButton = new JButton(new DefaultEditorKit.CopyAction());
             copyToolBarButton.setText("Copy");
+            copyToolBarButton.setIcon(new ImageIcon(getClass().getResource("icons/page_copy.png")));
             copyToolBarButton.addActionListener(this);
             copyToolBarButton.setActionCommand("edit_copy");
 
             JButton pasteToolBarButton = new JButton(new DefaultEditorKit.PasteAction());
             pasteToolBarButton.setText("Paste");
+            pasteToolBarButton.setIcon(new ImageIcon(getClass().getResource("icons/page_paste.png")));
             pasteToolBarButton.addActionListener(this);
             pasteToolBarButton.setActionCommand("edit_paste");
 
             JButton runToolBarButton = new JButton("Run");
+            runToolBarButton.setIcon(new ImageIcon(getClass().getResource("icons/resultset_next.png")));
 
         toolBar.add(newToolBarButton);
         toolBar.add(openToolBarButton);
