@@ -321,7 +321,7 @@ public class GUI extends JFrame implements ActionListener {
                 "Keylan Norum, \n" +
                 "Kaori Millar, \n" +
                 "Kuan Heng Kuo \n" +
-                "\n"
+                "\n" +
                 "Icons provided by: \n" +
                 "http://www.famfamfam.com/lab/icons/silk/"
             );
