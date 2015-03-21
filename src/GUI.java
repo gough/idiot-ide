@@ -1,10 +1,14 @@
 import java.awt.*;
+
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterJob;
 import java.io.*;
+import java.nio.file.Paths;
+
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.DefaultEditorKit;
@@ -246,6 +250,7 @@ public class GUI extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
+        FileWriter writer;
         
         if (action.equals("file_new")) {
             String title = "";
@@ -286,13 +291,44 @@ public class GUI extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Error opening file");
             }
         } else if (action.equals("file_save")) {
-            JOptionPane.showMessageDialog(null, "file_save");
+        	try {
+        		File file = new File(System.getProperty("user.home")+ File.separator + this.editor.getActiveTabTitle());
+        		file.createNewFile();
+        		
+				writer = new FileWriter(file);
+				writer.write(editor.getActiveTab().getText());
+				
+				writer.flush();
+			    writer.close();
+			    JOptionPane.showMessageDialog(null, file);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        	
         } else if (action.equals("file_saveAs")) {
             int returnValue = this.fileChooser.showSaveDialog(null);
+            
+            File file;
 
             if (returnValue == JFileChooser.APPROVE_OPTION) {
-                File file = new File(String.valueOf(this.fileChooser.getSelectedFile()));
-                System.out.println(file);
+            	if(this.fileChooser.getSelectedFile().getName().substring(this.fileChooser.getSelectedFile().getName().length()-6).equals(".idiot")){
+            		file = new File(String.valueOf(this.fileChooser.getSelectedFile()));
+            	}
+            	else{
+            		file = new File(String.valueOf(this.fileChooser.getSelectedFile())+".idiot");
+            	}
+                //System.out.println(file);
+                try {
+					writer = new FileWriter(file);
+					writer.write(editor.getActiveTab().getText());
+				
+					writer.flush();
+					writer.close();
+                } catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         } else if (action.equals("file_print")) {
             // TODO: get printing working
@@ -324,7 +360,7 @@ public class GUI extends JFrame implements ActionListener {
                 "\n" +
                 "Icons provided by: \n" +
                 "http://www.famfamfam.com/lab/icons/silk/\n" + 
-                "FamFamFam ©, 2015"
+                "FamFamFam, 2015"
             );
         }
     }

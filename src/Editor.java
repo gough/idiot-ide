@@ -12,7 +12,6 @@ public class Editor extends JTabbedPane {
     public void newTab(String title) {
         this.tabList.add(new JEditorPane());
         this.add(title, tabList.get(tabList.size() - 1));
-        this.setSelectedComponent(tabList.get(tabList.size() - 1));
     }
     
     public JEditorPane getTab(int index) {
@@ -21,5 +20,12 @@ public class Editor extends JTabbedPane {
     
     public JEditorPane getLastTab() {
         return this.tabList.get(this.tabList.size() - 1);
+    }
+    
+    public String getActiveTabTitle(){
+		return this.getTitleAt(this.getSelectedIndex());
+    }
+    public JEditorPane getActiveTab(){
+		return this.tabList.get(this.getSelectedIndex());
     }
 }
