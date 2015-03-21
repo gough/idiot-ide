@@ -323,7 +323,8 @@ public class GUI extends JFrame implements ActionListener {
                 "Kuan Heng Kuo \n" +
                 "\n" +
                 "Icons provided by: \n" +
-                "http://www.famfamfam.com/lab/icons/silk/"
+                "http://www.famfamfam.com/lab/icons/silk/\n" + 
+                "FamFamFam ©, 2015"
             );
         }
     }
