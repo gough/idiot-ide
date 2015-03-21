@@ -13,7 +13,7 @@
 * indicate errors in source code by line number
 * provide keyword bolding (syntax highlighting)
 
-## Your editor must...
+## The editor must...
 
 * be capable of editing files of at least 4k in size
 * ✓ be able to copy and paste text into and out of your editor
