@@ -344,8 +344,11 @@ public class GUI extends JFrame implements ActionListener {
             PrinterJob printerJob = PrinterJob.getPrinterJob();
             printerJob.printDialog();
         } else if (action.equals("file_quit")) {
-            // TODO: ask to save file
+           String [] buttons = {"Yes, exit.","Save and Quit","Cancel"};
+        	JOptionPane.showOptionDialog(null, "Are you sure you want to exit this program?\n All unsaved progress will be lost.", "Warning",
+        	        JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[2]);
             System.exit(0);
+           
         }
         
         if (action.equals("edit_cut")) {
