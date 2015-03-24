@@ -286,13 +286,17 @@ public class GUI extends JFrame implements ActionListener {
                 
                 this.editor.newTab(filePath.split("/")[filePath.split("/").length - 1]);
                 this.editor.getLastTab().setText(fileContents);
+                
+                editor.setLastSaveDirectory(file.getAbsolutePath(), editor.getIndexOfLastTab());
+                System.out.println(editor.getLastSaveDirectory(editor.getSelectedIndex()));
             } else if (returnValue == JFileChooser.CANCEL_OPTION) {
             } else {
                 JOptionPane.showMessageDialog(null, "Error opening file");
             }
+            
         } else if (action.equals("file_save")) {
         	try {
-        		File file = new File(System.getProperty("user.home")+ File.separator + this.editor.getActiveTabTitle());
+        		File file = new File(editor.getLastSaveDirectory(editor.getSelectedIndex()));
         		file.createNewFile();
         		
 				writer = new FileWriter(file);
@@ -318,7 +322,6 @@ public class GUI extends JFrame implements ActionListener {
             	else{
             		file = new File(String.valueOf(this.fileChooser.getSelectedFile())+".idiot");
             	}
-                //System.out.println(file);
                 try {
 					writer = new FileWriter(file);
 					writer.write(editor.getActiveTab().getText());
@@ -329,7 +332,13 @@ public class GUI extends JFrame implements ActionListener {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+                
+                editor.setLastSaveDirectory(file.getAbsolutePath(), editor.getSelectedIndex());
+                System.out.println(editor.getLastSaveDirectory(editor.getSelectedIndex()));
             }
+            
+            
+            
         } else if (action.equals("file_print")) {
             // TODO: get printing working
             PrinterJob printerJob = PrinterJob.getPrinterJob();
