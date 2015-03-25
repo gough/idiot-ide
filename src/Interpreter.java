@@ -29,10 +29,12 @@ public class Interpreter {
 
         System.out.println("IN: " + segments);
 
+        int arguments = 0;
         if (segments.get(0).equals("ADD")) {
-
+            arguments = 3;
         } else if (segments.get(0).equals("ASSIGN")) {
-            if (segments.size() == 3) {
+            arguments = 2;
+            if (segments.size() == arguments + 1) {
                 if (variables.containsKey(segments.get(1))) {
                     variables.put(segments.get(1), segments.get(2));
                     this.printOutput("ASSIGN " + segments.get(2) + " to " + segments.get(1));
@@ -40,12 +42,12 @@ public class Interpreter {
                     this.printErrorAndExit("name " + segments.get(1) + " is not defined");
                 }
             } else {
-                this.printErrorAndExit("ASSIGN takes exactly 2 arguments (" + (segments.size() - 1) + " given)");
+                this.printErrorAndExit("ASSIGN takes exactly " + arguments + " arguments (" + (segments.size() - 1) + " given)");
             }
         } else if (segments.get(0).equals("CMT")) {
             // do nothing
         } else if (segments.get(0).equals("DIV")) {
-
+            arguments = 3;
         } else if (segments.get(0).equals("END")) {
 
         } else if (segments.get(0).equals("ENTER")) {
@@ -55,21 +57,23 @@ public class Interpreter {
         } else if (segments.get(0).equals("MUL")) {
 
         } else if (segments.get(0).equals("PRINT")) {
-            if (segments.size() == 2) {
+            arguments = 1;
+            if (segments.size() == arguments + 1) {
                 if (variables.containsKey(segments.get(1))) {
                     this.printOutput((String) variables.get(segments.get(1)));
                 } else {
                     this.printErrorAndExit("name " + segments.get(1) + " is not defined");
                 }
             } else {
-                this.printErrorAndExit("PRINT takes exactly 1 argument (" + (segments.size() - 1) + " given)");
+                this.printErrorAndExit("PRINT takes exactly " + arguments + " argument (" + (segments.size() - 1) + " given)");
             }
         } else if (segments.get(0).equals("START")) {
 
         } else if (segments.get(0).equals("SUB")) {
             
         } else if (segments.get(0).equals("VAR")) {
-            if (segments.size() == 2) {
+            arguments = 1;
+            if (segments.size() == arguments + 1) {
                 if (!Character.isDigit(segments.get(1).charAt(0))) {
                     variables.put(segments.get(1), null);
                     this.printOutput("var " + segments.get(1) + " defined");
@@ -77,7 +81,7 @@ public class Interpreter {
                     this.printErrorAndExit("variable name cannot start with a digit");
                 }
             } else {
-                this.printErrorAndExit("VAR takes exactly 1 argument (" + (segments.size() - 1) + " given)");
+                this.printErrorAndExit("VAR takes exactly " + arguments + " argument (" + (segments.size() - 1) + " given)");
             }
         } else {
             this.printErrorAndExit(segments.get(0) + " is not a valid function");
