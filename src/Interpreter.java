@@ -110,11 +110,15 @@ public class Interpreter {
         } else if (segments.get(0).equals("VAR")) {
             arguments = 1;
             if (segments.size() == arguments + 1) {
-                if (!Character.isDigit(segments.get(1).charAt(0))) {
-                    variables.put(segments.get(1), null);
-                    this.printOutput("var " + segments.get(1) + " defined");
+                if (!variables.containsKey(segments.get(1))) {
+                    if (!Character.isDigit(segments.get(1).charAt(0))) {
+                        variables.put(segments.get(1), null);
+                        this.printOutput("var " + segments.get(1) + " defined");
+                    } else {
+                        this.printErrorAndExit("variable name cannot start with a digit");
+                    }
                 } else {
-                    this.printErrorAndExit("variable name cannot start with a digit");
+                    this.printErrorAndExit("name " + segments.get(1) + " is already defined");
                 }
             } else {
                 this.printErrorAndExit("VAR takes exactly " + arguments + " argument (" + (segments.size() - 1) + " given)");
