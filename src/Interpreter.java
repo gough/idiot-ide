@@ -36,7 +36,7 @@ public class Interpreter {
                 if (variables.containsKey(segments.get(1))) {
                     if (variables.containsKey(segments.get(2))) {
                         if (variables.containsKey(segments.get(3))) {
-                            variables.put(segments.get(3), Double.parseDouble(segments.get(1)) + Double.parseDouble(segments.get(2)));
+                            variables.put(segments.get(3), variables.get(segments.get(1)) + variables.get(segments.get(2)));
                             this.printOutput("ADD " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
                         } else {
                             this.printErrorAndExit("name " + segments.get(3) + " is not defined");
