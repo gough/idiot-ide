@@ -32,6 +32,24 @@ public class Interpreter {
         int arguments = 0;
         if (segments.get(0).equals("ADD")) {
             arguments = 3;
+            if (segments.size() == arguments + 1) {
+                if (variables.containsKey(segments.get(1))) {
+                    if (variables.containsKey(segments.get(2))) {
+                        if (variables.containsKey(segments.get(3))) {
+                            variables.put(segments.get(3), Double.parseDouble(segments.get(1)) + Double.parseDouble(segments.get(2)));
+                            this.printOutput("ADD " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
+                        } else {
+                            this.printErrorAndExit("name " + segments.get(3) + " is not defined");
+                        }
+                    } else {
+                        this.printErrorAndExit("name " + segments.get(2) + " is not defined");
+                    }
+                } else {
+                    this.printErrorAndExit("name " + segments.get(1) + " is not defined");
+                }
+            } else {
+                this.printErrorAndExit("ADD takes exactly " + arguments + " arguments (" + (segments.size() - 1) + " given)");
+            }
         } else if (segments.get(0).equals("ASSIGN")) {
             arguments = 2;
             if (segments.size() == arguments + 1) {
