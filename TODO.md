@@ -5,10 +5,10 @@
 * have a file management window
 * ✓ have a code editor window
 * ✓ have a display window
-* be able to create files
-* be able to save files
-* be able to load files
-* be able to edit files
+* ✓ be able to create files
+* ✓ be able to save files
+* ✓ be able to load files
+* ✓ be able to edit files
 * be able to print files
 * indicate errors in source code by line number
 * provide keyword bolding (syntax highlighting)
