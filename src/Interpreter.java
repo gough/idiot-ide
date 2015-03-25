@@ -54,7 +54,7 @@ public class Interpreter {
             arguments = 2;
             if (segments.size() == arguments + 1) {
                 if (variables.containsKey(segments.get(1))) {
-                    variables.put(segments.get(1), segments.get(2));
+                    variables.put(segments.get(1), Double.parseDouble(segments.get(2)));
                     this.printOutput("ASSIGN " + segments.get(2) + " to " + segments.get(1));
                 } else {
                     this.printErrorAndExit("name " + segments.get(1) + " is not defined");
@@ -96,7 +96,7 @@ public class Interpreter {
             arguments = 1;
             if (segments.size() == arguments + 1) {
                 if (variables.containsKey(segments.get(1))) {
-                    this.printOutput((String) variables.get(segments.get(1)));
+                    this.printOutput(Double.toString(variables.get(segments.get(1))));
                 } else {
                     this.printErrorAndExit("name " + segments.get(1) + " is not defined");
                 }
