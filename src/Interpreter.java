@@ -2,6 +2,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Interpreter {
     private Map<String, Double> variables = new HashMap<String, Double>();
@@ -87,7 +88,17 @@ public class Interpreter {
         } else if (segments.get(0).equals("END")) {
 
         } else if (segments.get(0).equals("ENTER")) {
-
+            arguments = 1;
+            if (segments.size() == arguments + 1) {
+                if (variables.containsKey(segments.get(1))) {
+                    Scanner scanner = new Scanner(System.in);
+                    variables.put(segments.get(1), scanner.nextDouble());
+                } else {
+                    this.printErrorAndExit("name " + segments.get(2) + " is not defined");
+                }
+            } else {
+                this.printErrorAndExit("ENTER takes exactly " + arguments + " arguments (" + (segments.size() - 1) + " given)");
+            }
         } else if (segments.get(0).equals("INC")) {
 
         } else if (segments.get(0).equals("MUL")) {
