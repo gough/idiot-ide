@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Interpreter {
-    private Map variables = new HashMap();
+    private Map<String, Double> variables = new HashMap<String, Double>();
 
     public Interpreter() {}
 
