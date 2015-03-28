@@ -1,5 +1,5 @@
 import javax.swing.*;
-
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -14,7 +14,11 @@ public class Editor extends JTabbedPane {
 
     public void newTab(String title) {
     	this.editList.add(new JEditorPane());
-        this.tabList.add(new JScrollPane(this.editList.get(this.editList.size()-1)));
+        TextLineNumber tln = new TextLineNumber(this.editList.get(this.editList.size() - 1));
+        tln.setCurrentLineForeground(new Color(0, 0, 255));
+        tln.setMinimumDisplayDigits(2);
+        this.tabList.add(new JScrollPane(this.editList.get(this.editList.size() - 1)));
+        this.tabList.get(this.tabList.size() - 1).setRowHeaderView(tln);
         this.add(title, tabList.get(tabList.size() - 1));
         this.setSelectedIndex(this.tabList.size() - 1);
         this.lastSaveDirectory.add(System.getProperty("user.home")+ File.separator + this.getActiveTabTitle());
