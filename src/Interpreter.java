@@ -94,7 +94,7 @@ public class Interpreter {
                     Scanner scanner = new Scanner(System.in);
                     variables.put(segments.get(1), scanner.nextDouble());
                 } else {
-                    this.printErrorAndExit("name " + segments.get(2) + " is not defined");
+                    this.printErrorAndExit("name " + segments.get(1) + " is not defined");
                 }
             } else {
                 this.printErrorAndExit("ENTER takes exactly " + arguments + " arguments (" + (segments.size() - 1) + " given)");
