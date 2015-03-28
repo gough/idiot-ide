@@ -267,10 +267,10 @@ public class GUI extends JFrame implements ActionListener {
 
 		// JEditorPane(s) used as a placeholder, could be changed in future
 		JEditorPane consolePane = new JEditorPane();
-		JEditorPane errorPane = new JEditorPane();
+		
 
 		bottomTabbedPane.add(consolePane, "Console");
-		bottomTabbedPane.add(errorPane, "Errors");
+		
 
 		rightSplitPane.add(this.editor);
 		rightSplitPane.add(bottomTabbedPane);
