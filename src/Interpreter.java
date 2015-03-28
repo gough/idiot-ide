@@ -6,13 +6,15 @@ import java.util.Scanner;
 
 public class Interpreter {
     private Map<String, Double> variables = new HashMap<String, Double>();
+    private int lineNumber;
 
     public Interpreter() {}
 
     public int interpret(String string) {
-        ArrayList<String> lines = new ArrayList<String>();
-
+        this.lineNumber = 0;
         for (String line : string.split("[\\r\\n]+")) {
+            lineNumber++;
+
             // split supplied string on newline characters, grouping newline and empty lines as delimiter
             this.interpretString(line);
         }
@@ -203,7 +205,7 @@ public class Interpreter {
     }
 
     private void printErrorAndExit(String error) {
-        System.out.println("ERROR: " + error);
+        System.out.println("ERROR (line " + this.lineNumber + "): " + error);
         System.exit(1);
     }
 }
