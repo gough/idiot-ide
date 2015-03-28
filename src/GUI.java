@@ -362,6 +362,7 @@ public class GUI extends JFrame implements ActionListener {
         } else if (action.equals("help_about")) {
             JOptionPane.showMessageDialog(null,
                 "Version 1.0 \n" +
+                "\n" +
                 "Created By: \n" +
                 "Ben Potter, \n" +
                 "Adam Gough, \n" +
