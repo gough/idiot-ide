@@ -100,7 +100,17 @@ public class Interpreter {
                 this.printErrorAndExit("ENTER takes exactly " + arguments + " arguments (" + (segments.size() - 1) + " given)");
             }
         } else if (segments.get(0).equals("INC")) {
-
+            arguments = 1;
+            if (segments.size() == arguments + 1) {
+                if (variables.containsKey(segments.get(1))) {
+                    variables.put(segments.get(1), variables.get(segments.get(1)) + 1);
+                    this.printOutput("INC " + segments.get(1) + " by 1");
+                } else {
+                    this.printErrorAndExit("name " + segments.get(2) + " is not defined");
+                }
+            } else {
+                this.printErrorAndExit("INC takes exactly " + arguments + " argument (" + (segments.size() - 1) + " given)");
+            }
         } else if (segments.get(0).equals("MUL")) {
             arguments = 3;
             if (segments.size() == arguments + 1) {
