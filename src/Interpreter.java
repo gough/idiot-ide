@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,10 +6,16 @@ import java.util.Scanner;
 public class Interpreter {
     private Map<String, Double> variables = new HashMap<String, Double>();
     private int lineNumber;
+    private int totalLines;
 
     public Interpreter() {}
 
     public int interpret(String string) {
+        this.totalLines = 0;
+        for (String line : string.split("[\\r\\n]+")) {
+            this.totalLines++;
+        }
+
         this.lineNumber = 0;
         for (String line : string.split("[\\r\\n]+")) {
             lineNumber++;
@@ -32,7 +37,16 @@ public class Interpreter {
 
         System.out.println("IN: " + segments);
 
-        int arguments = 0;
+
+        if (this.lineNumber == 1 && !segments.get(0).equals("START")) {
+            this.printErrorAndExit("START is not called correctly");
+        }
+
+        if (this.lineNumber == totalLines && !segments.get(0).equals("END")) {
+            this.printErrorAndExit("END is not called correctly");
+        }
+
+        int arguments;
         if (segments.get(0).equals("ADD")) {
             arguments = 3;
             if (segments.size() == arguments + 1) {
@@ -88,13 +102,10 @@ public class Interpreter {
                 this.printErrorAndExit("DIV takes exactly " + arguments + " arguments (" + (segments.size() - 1) + " given)");
             }
         } else if (segments.get(0).equals("END")) {
-        	arguments = 0;
-        	if(segments.size() == arguments + 1){
-        		
-        	} else {
-    			this.printErrorAndExit("END takes exactly " + arguments + " argument (" + (segments.size() - 1) + " given)");
-        	}
-
+            arguments = 0;
+            if (segments.size() != arguments + 1) {
+                this.printErrorAndExit("END takes exactly " + arguments + " arguments (" + (segments.size() - 1) + " given)");
+            }
         } else if (segments.get(0).equals("ENTER")) {
             arguments = 1;
             if (segments.size() == arguments + 1) {
@@ -151,12 +162,10 @@ public class Interpreter {
                 this.printErrorAndExit("PRINT takes exactly " + arguments + " argument (" + (segments.size() - 1) + " given)");
             }
         } else if (segments.get(0).equals("START")) {
-        	arguments = 0;
-        	if(segments.size() == arguments + 1){
-        		
-        	} else {
-    			this.printErrorAndExit("START takes exactly " + arguments + " argument (" + (segments.size() - 1) + " given)");
-        	}
+            arguments = 0;
+            if (segments.size() != arguments + 1) {
+                this.printErrorAndExit("START takes exactly " + arguments + " arguments (" + (segments.size() - 1) + " given)");
+            }
         } else if (segments.get(0).equals("SUB")) {
             arguments = 3;
             if (segments.size() == arguments + 1) {
