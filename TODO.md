@@ -17,7 +17,7 @@
 
 * ✓ be capable of editing files of at least 4k in size
 * ✓ be able to copy and paste text into and out of your editor
-* support an MDI style interface (edit more than one file at a time)
+* ✓ support an MDI style interface (edit more than one file at a time)
 
 ## The menu must contain at least the following items:
 
