@@ -6,17 +6,13 @@ import java.util.Scanner;
 
 public class Interpreter {
     private Map<String, Double> variables = new HashMap<String, Double>();
-    private int lineNumber;
 
     public Interpreter() {}
 
     public int interpret(String string) {
         ArrayList<String> lines = new ArrayList<String>();
 
-        this.lineNumber = 0;
         for (String line : string.split("[\\r\\n]+")) {
-            this.lineNumber++;
-
             // split supplied string on newline characters, grouping newline and empty lines as delimiter
             this.interpretString(line);
         }
@@ -90,6 +86,12 @@ public class Interpreter {
                 this.printErrorAndExit("DIV takes exactly " + arguments + " arguments (" + (segments.size() - 1) + " given)");
             }
         } else if (segments.get(0).equals("END")) {
+        	arguments = 0;
+        	if(segments.size() == arguments + 1){
+        		
+        	} else {
+    			this.printErrorAndExit("END takes exactly " + arguments + " argument (" + (segments.size() - 1) + " given)");
+        	}
 
         } else if (segments.get(0).equals("ENTER")) {
             arguments = 1;
@@ -147,7 +149,12 @@ public class Interpreter {
                 this.printErrorAndExit("PRINT takes exactly " + arguments + " argument (" + (segments.size() - 1) + " given)");
             }
         } else if (segments.get(0).equals("START")) {
-
+        	arguments = 0;
+        	if(segments.size() == arguments + 1){
+        		
+        	} else {
+    			this.printErrorAndExit("START takes exactly " + arguments + " argument (" + (segments.size() - 1) + " given)");
+        	}
         } else if (segments.get(0).equals("SUB")) {
             arguments = 3;
             if (segments.size() == arguments + 1) {
@@ -196,7 +203,7 @@ public class Interpreter {
     }
 
     private void printErrorAndExit(String error) {
-        System.out.println("ERROR (line " + this.lineNumber + "): " + error);
+        System.out.println("ERROR: " + error);
         System.exit(1);
     }
 }
