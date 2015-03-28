@@ -10,12 +10,12 @@
 * ✓ be able to load files
 * ✓ be able to edit files
 * be able to print files
-* indicate errors in source code by line number
+* ✓ indicate errors in source code by line number
 * provide keyword bolding (syntax highlighting)
 
 ## The editor must...
 
-* be capable of editing files of at least 4k in size
+* ✓ be capable of editing files of at least 4k in size
 * ✓ be able to copy and paste text into and out of your editor
 * support an MDI style interface (edit more than one file at a time)
 
@@ -45,4 +45,4 @@
 **NOTE:** ✓ The editor must support keyboard shortcuts for all menu items.
 
 ## The interpreter must support...
-* the one type of variable (a real type that holds numbers)
+* ✓ the one type of variable (a real type that holds numbers)
