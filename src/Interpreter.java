@@ -102,7 +102,25 @@ public class Interpreter {
         } else if (segments.get(0).equals("INC")) {
 
         } else if (segments.get(0).equals("MUL")) {
-
+            arguments = 3;
+            if (segments.size() == arguments + 1) {
+                if (variables.containsKey(segments.get(1))) {
+                    if (variables.containsKey(segments.get(2))) {
+                        if (variables.containsKey(segments.get(3))) {
+                            variables.put(segments.get(3), variables.get(segments.get(1)) * variables.get(segments.get(2)));
+                            this.printOutput("MUL " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
+                        } else {
+                            this.printErrorAndExit("name " + segments.get(3) + " is not defined");
+                        }
+                    } else {
+                        this.printErrorAndExit("name " + segments.get(2) + " is not defined");
+                    }
+                } else {
+                    this.printErrorAndExit("name " + segments.get(1) + " is not defined");
+                }
+            } else {
+                this.printErrorAndExit("MUL takes exactly " + arguments + " arguments (" + (segments.size() - 1) + " given)");
+            }
         } else if (segments.get(0).equals("PRINT")) {
             arguments = 1;
             if (segments.size() == arguments + 1) {
