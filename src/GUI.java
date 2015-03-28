@@ -344,10 +344,22 @@ public class GUI extends JFrame implements ActionListener {
             printerJob.printDialog();
         } else if (action.equals("file_quit")) {
            String [] buttons = {"Yes, exit.","Save and Quit","Cancel"};
-        	JOptionPane.showOptionDialog(null, "Are you sure you want to exit this program?\n All unsaved progress will be lost.", "Warning",
-        	        JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[2]);
-            System.exit(0);
-           
+        	int warnopt = JOptionPane.showOptionDialog(null, "Are you sure you want to exit this program?\n All unsaved progress will be lost.", "Warning",
+        	        JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons [1]);
+
+        	if(warnopt == 0)
+        	{
+        		System.exit(0);
+        	}
+        	if(warnopt == 1)
+        	{
+        		JOptionPane.showMessageDialog(null, "save");
+        	}
+        	if(warnopt == 2)
+        	{
+        		
+        	}
+            
         }
         
         if (action.equals("edit_cut")) {
@@ -361,7 +373,7 @@ public class GUI extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "help_viewHelp");
         } else if (action.equals("help_about")) {
             JOptionPane.showMessageDialog(null,
-                "Version 1.0 \n" +
+                "Version 4.0 \n" +
                 "\n" +
                 "Created By: \n" +
                 "Ben Potter, \n" +
@@ -377,4 +389,3 @@ public class GUI extends JFrame implements ActionListener {
         }
     }
 }
-
