@@ -11,10 +11,12 @@ import java.io.*;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.DefaultEditorKit;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class GUI extends JFrame implements ActionListener {
 	private Editor editor = null;
 	private JFileChooser fileChooser = new JFileChooser();
+	private FileTree fileTree = new FileTree();
 
 	public GUI(String title, int width, int height) {
 		// call JFrame constructor to create frame with our title
@@ -249,9 +251,7 @@ public class GUI extends JFrame implements ActionListener {
 
 		// leftSplitPane currently contains the file browser
 		JSplitPane leftSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-
-		JEditorPane filePane = new JEditorPane();
-		JScrollPane fileScrollPane = new JScrollPane(filePane);
+		JScrollPane fileScrollPane = new JScrollPane(fileTree);
 
 		leftSplitPane.add(fileScrollPane);
 		leftSplitPane.setMinimumSize(new Dimension(0, 0));
@@ -296,6 +296,7 @@ public class GUI extends JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(null,
 							"Please enter a valid file name.");
 				}
+				fileTree.addNode(new DefaultMutableTreeNode(new File(System.getProperty("user.home")+ File.separator + title + ".idiot")));
 			}
 
 			this.editor.newTab(title + ".idiot");
@@ -318,20 +319,20 @@ public class GUI extends JFrame implements ActionListener {
 					while ((line = bufferedReader.readLine()) != null) {
 						fileContents = fileContents + line + "\n";
 					}
+					bufferedReader.close();
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 
-				this.editor
-						.newTab(filePath.split("/")[filePath.split("/").length - 1]);
+				this.editor.newTab(filePath.split("/")[filePath.split("/").length - 1]);
 				this.editor.getLastTab().setText(fileContents);
 
 				editor.setLastSaveDirectory(file.getAbsolutePath(),
-						editor.getIndexOfLastTab());
-				System.out.println(editor.getLastSaveDirectory(editor
-						.getSelectedIndex()));
+				editor.getIndexOfLastTab());
+				System.out.println(editor.getLastSaveDirectory(editor.getSelectedIndex()));
+				this.fileTree.addNode(new DefaultMutableTreeNode(file));
 			} else if (returnValue == JFileChooser.CANCEL_OPTION) {
 			} else {
 				JOptionPane.showMessageDialog(null, "Error opening file");
@@ -356,21 +357,17 @@ public class GUI extends JFrame implements ActionListener {
 
 		} else if (action.equals("file_saveAs")) {
 			int returnValue = this.fileChooser.showSaveDialog(null);
-
+			DefaultMutableTreeNode node = new DefaultMutableTreeNode(new File(this.editor.getLastSaveDirectory(this.editor.getSelectedIndex())));
+			System.out.println(node);
+			fileTree.removeNode(node);
+			
 			File file;
-
+			
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
-				if (this.fileChooser
-						.getSelectedFile()
-						.getName()
-						.substring(
-								this.fileChooser.getSelectedFile().getName()
-										.length() - 6).equals(".idiot")) {
-					file = new File(String.valueOf(this.fileChooser
-							.getSelectedFile()));
+				if (this.fileChooser.getSelectedFile().getName().substring(this.fileChooser.getSelectedFile().getName().length() - 6).equals(".idiot")) {
+					file = new File(String.valueOf(this.fileChooser.getSelectedFile()));
 				} else {
-					file = new File(String.valueOf(this.fileChooser
-							.getSelectedFile()) + ".idiot");
+					file = new File(String.valueOf(this.fileChooser.getSelectedFile()) + ".idiot");
 				}
 				try {
 					writer = new FileWriter(file);
@@ -387,6 +384,8 @@ public class GUI extends JFrame implements ActionListener {
 						editor.getSelectedIndex());
 				System.out.println(editor.getLastSaveDirectory(editor
 						.getSelectedIndex()));
+				
+				this.fileTree.addNode(new DefaultMutableTreeNode(file));
 			}
 
 		} else if (action.equals("file_print")) {
