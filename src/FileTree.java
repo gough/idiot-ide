@@ -1,3 +1,12 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
@@ -11,6 +20,7 @@ public class FileTree extends JTree
 	private DefaultMutableTreeNode rootNode;
 	private DefaultTreeModel model;
 	private int nodeCount;
+	private File fileHistory;
 	
 	public FileTree()
 	{
@@ -18,8 +28,34 @@ public class FileTree extends JTree
 		this.setEditable(false);
 		this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		this.setShowsRootHandles(true);
-		rootNode = (DefaultMutableTreeNode)this.getModel().getRoot();
 		model = (DefaultTreeModel) this.getModel();
+		rootNode = (DefaultMutableTreeNode) model.getRoot();
+		this.fileHistory = new File("File_Data");
+		try
+		{
+			if(fileHistory.exists())
+			{
+				BufferedReader bufferedReader = new BufferedReader(
+						new FileReader(fileHistory));
+
+				String line;
+				while ((line = bufferedReader.readLine()) != null) {
+					this.model.insertNodeInto(new DefaultMutableTreeNode(line), rootNode, rootNode.getChildCount());
+					this.expandRow(this.getRowCount()-1);
+				}
+				bufferedReader.close();	
+			}
+			else
+			{
+				fileHistory.createNewFile();
+			}
+		} 
+		catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} 
+		catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	public FileTree(DefaultMutableTreeNode node)
 	{
@@ -32,9 +68,11 @@ public class FileTree extends JTree
 	
 	public void addNode(DefaultMutableTreeNode node)
 	{
+		
 		this.model.insertNodeInto(node, rootNode, rootNode.getChildCount());
 		this.expandRow(this.getRowCount()-1);
 		this.nodeCount += 1;
+		this.saveFileTree();
 	}
 	public void removeNode(DefaultMutableTreeNode node)
 	{
@@ -48,9 +86,28 @@ public class FileTree extends JTree
 				this.nodeCount -= 1;
 			}
 		}
+		this.saveFileTree();
 	}
 
 	public DefaultMutableTreeNode getRootNode() {
 		return this.rootNode;
+	}
+	private void saveFileTree()
+	{
+		FileWriter writer;
+		try {
+			this.fileHistory.createNewFile();
+
+		writer = new FileWriter(this.fileHistory);
+		for(int i = 0; i < this.rootNode.getChildCount(); i++)
+		{
+			writer.write(this.rootNode.getChildAt(i).toString()+ "\n");
+		}
+		writer.flush();
+		writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
