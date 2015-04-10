@@ -51,4 +51,20 @@ public class Editor extends JTabbedPane {
 	public void setLastSaveDirectory(String lastSaveDirectory,int tabIndex) {
 		this.lastSaveDirectory.set(tabIndex, lastSaveDirectory);
 	}
+	public void removeTab(int tabIndex) {
+		if(!editList.isEmpty())
+		{
+			this.editList.remove(tabIndex);
+			this.tabList.remove(tabIndex);
+			this.removeTabAt(tabIndex);
+		}
+		if(!editList.isEmpty() && tabIndex > 0)
+		{
+			this.setSelectedIndex(tabIndex - 1);
+		}
+		else if(!editList.isEmpty() && tabIndex == 0)
+		{
+			this.setSelectedIndex(0);
+		}
+	}
 }

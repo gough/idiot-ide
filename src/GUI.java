@@ -60,6 +60,14 @@ public class GUI extends JFrame implements ActionListener {
 				"icons/folder_page.png")));
 		openMenuItem.addActionListener(this);
 		openMenuItem.setActionCommand("file_open");
+		
+		JMenuItem closeMenuItem = new JMenuItem("Close");
+		closeMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,
+				ActionEvent.CTRL_MASK));
+		closeMenuItem.setIcon(new ImageIcon(getClass().getResource(
+				"icons/application_delete.png")));
+		closeMenuItem.addActionListener(this);
+		closeMenuItem.setActionCommand("file_close");
 
 		JMenuItem saveMenuItem = new JMenuItem("Save");
 		saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
@@ -95,6 +103,7 @@ public class GUI extends JFrame implements ActionListener {
 
 		fileMenu.add(newMenuItem);
 		fileMenu.add(openMenuItem);
+		fileMenu.add(closeMenuItem);
 		fileMenu.add(saveMenuItem);
 		fileMenu.add(saveAsMenuItem);
 		fileMenu.add(new JSeparator());
@@ -337,7 +346,9 @@ public class GUI extends JFrame implements ActionListener {
 			} else {
 				JOptionPane.showMessageDialog(null, "Error opening file");
 			}
-
+			
+		} else if (action.equals("file_close")) {
+			this.editor.removeTab(this.editor.getSelectedIndex());	
 		} else if (action.equals("file_save")) {
 			try {
 				File file = new File(editor.getLastSaveDirectory(editor
