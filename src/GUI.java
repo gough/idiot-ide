@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.print.PrinterJob;
 import java.io.*;
 
@@ -31,7 +33,46 @@ public class GUI extends JFrame implements ActionListener {
 		// add remaining components to frame
 		addComponentsToPane(this.getContentPane());
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e) {
+				FileWriter writer;
+				String[] buttons = { "Yes, exit.", "Save and Exit", "Cancel" };
+				int warnopt = JOptionPane
+						.showOptionDialog(
+								null,
+								"Are you sure you want to exit this program?\n All unsaved progress will be lost.",
+								"Warning", JOptionPane.WARNING_MESSAGE, 0, null,
+								buttons, buttons[1]);
+
+				if (warnopt == 0) {
+					System.exit(0);
+				}
+				if (warnopt == 1) {
+					for(int i = editor.getTabCount()-1; i >= 0; i--)
+					{
+						try {
+							File file = new File(editor.getLastSaveDirectory(i));
+							file.createNewFile();
+
+							writer = new FileWriter(file);
+							writer.write(editor.getActiveTab().getText());
+
+							writer.flush();
+							writer.close();
+							//JOptionPane.showMessageDialog(null, file);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						editor.removeTab(0);
+					}
+					System.exit(0);
+				}
+			}
+			
+		});
 		setMinimumSize(new Dimension(width, height));
 		pack();
 		setLocationRelativeTo(null);
@@ -196,13 +237,18 @@ public class GUI extends JFrame implements ActionListener {
 				"icons/folder_page.png")));
 		openToolBarButton.addActionListener(this);
 		openToolBarButton.setActionCommand("file_open");
+		
+		JButton closeToolBarButton = new JButton("Close");
+		closeToolBarButton.setIcon(new ImageIcon(getClass().getResource(
+				"icons/application_delete.png")));
+		closeToolBarButton.addActionListener(this);
+		closeToolBarButton.setActionCommand("file_close");
 
 		JButton saveToolBarButton = new JButton("Save");
 		saveToolBarButton.setIcon(new ImageIcon(getClass().getResource(
 				"icons/disk.png")));
 		saveToolBarButton.addActionListener(this);
 		saveToolBarButton.setActionCommand("file_save");
-
 		JButton saveAsToolBarButton = new JButton("Save As");
 		saveAsToolBarButton.setIcon(new ImageIcon(getClass().getResource(
 				"icons/page_save.png")));
@@ -244,6 +290,7 @@ public class GUI extends JFrame implements ActionListener {
 
 		toolBar.add(newToolBarButton);
 		toolBar.add(openToolBarButton);
+		toolBar.add(closeToolBarButton);
 		toolBar.add(saveToolBarButton);
 		toolBar.add(saveAsToolBarButton);
 		toolBar.add(printToolBarButton);
@@ -314,8 +361,7 @@ public class GUI extends JFrame implements ActionListener {
 					"idiot"));
 
 			int returnValue = this.fileChooser.showOpenDialog(null);
-			String filePath = String
-					.valueOf(this.fileChooser.getSelectedFile());
+			String filePath = String.valueOf(this.fileChooser.getSelectedFile());
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				File file = new File(filePath);
 				String fileContents = "";
@@ -348,7 +394,54 @@ public class GUI extends JFrame implements ActionListener {
 			}
 			
 		} else if (action.equals("file_close")) {
-			this.editor.removeTab(this.editor.getSelectedIndex());	
+			int saved = 1;
+			File file = new File(this.editor.getLastSaveDirectory(this.editor.getSelectedIndex()));
+			String fileContents = "";
+
+			try {
+				BufferedReader bufferedReader = new BufferedReader(
+						new FileReader(file));
+
+				String line;
+				while ((line = bufferedReader.readLine()) != null) {
+					fileContents = fileContents + line + "\n";
+				}
+				bufferedReader.close();
+			} catch (FileNotFoundException e1) {
+				saved = 0;
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			if(!fileContents.equals(editor.getActiveTab().getText()) || saved == 0)
+			{
+				System.out.println("not saved");
+				int option = JOptionPane.showConfirmDialog(null, "File not saved. Would you like to save before quiting?");
+				
+				if(option == JOptionPane.YES_OPTION)
+				{
+					try {
+						file.createNewFile();
+
+						writer = new FileWriter(file);
+						writer.write(editor.getActiveTab().getText());
+
+						writer.flush();
+						writer.close();
+						JOptionPane.showMessageDialog(null, file);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}	
+					this.editor.removeTab(this.editor.getSelectedIndex());
+				}
+				else if(option == JOptionPane.NO_OPTION)
+				{
+					this.editor.removeTab(this.editor.getSelectedIndex());
+				}
+			}
+			else{
+				this.editor.removeTab(this.editor.getSelectedIndex());	
+			}
 		} else if (action.equals("file_save")) {
 			try {
 				File file = new File(editor.getLastSaveDirectory(editor
@@ -416,12 +509,27 @@ public class GUI extends JFrame implements ActionListener {
 				System.exit(0);
 			}
 			if (warnopt == 1) {
-				JOptionPane.showMessageDialog(null, "save");
+				for(int i = this.editor.getTabCount()-1; i >= 0; i--)
+				{
+					try {
+						File file = new File(editor.getLastSaveDirectory(i));
+						file.createNewFile();
+
+						writer = new FileWriter(file);
+						writer.write(editor.getActiveTab().getText());
+
+						writer.flush();
+						writer.close();
+						//JOptionPane.showMessageDialog(null, file);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					this.editor.removeTab(0);
+				}
 				System.exit(0);
 			}
-			if (warnopt == 2) {
-
-			}
+			if (warnopt == 2) {}
 
 		}
 
@@ -461,4 +569,5 @@ public class GUI extends JFrame implements ActionListener {
 					+ "FamFamFam, 2015");
 		}
 	}
+	
 }
