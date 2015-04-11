@@ -39,7 +39,7 @@ public class GUI extends JFrame implements ActionListener {
 		{
 			public void windowClosing(WindowEvent e) {
 				FileWriter writer;
-				String[] buttons = { "Yes, exit.", "Save and Exit", "Cancel" };
+				String[] buttons = { "Exit without saving", "Save and exit", "Cancel" };
 				int warnopt = JOptionPane
 						.showOptionDialog(
 								null,
