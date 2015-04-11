@@ -7,6 +7,8 @@ import javax.swing.border.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
 
+/* Taken from http://www.camick.com/java/source/TextLineNumber.java */
+
 /**
  *  This class will display line numbers for a related text component. The text
  *  component must use the same line height for each line. TextLineNumber
