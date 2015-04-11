@@ -2,7 +2,7 @@
 
 ## The IDE must...
 
-* have a file management window
+* ✓ have a file management window
 * ✓ have a code editor window
 * ✓ have a display window
 * ✓ be able to create files
