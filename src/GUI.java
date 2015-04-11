@@ -448,7 +448,7 @@ public class GUI extends JFrame implements ActionListener {
 
 						writer.flush();
 						writer.close();
-						JOptionPane.showMessageDialog(null, file);
+						//JOptionPane.showMessageDialog(null, file);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -474,7 +474,7 @@ public class GUI extends JFrame implements ActionListener {
 
 				writer.flush();
 				writer.close();
-				JOptionPane.showMessageDialog(null, file);
+				//JOptionPane.showMessageDialog(null, file);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
