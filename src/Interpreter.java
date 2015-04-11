@@ -10,7 +10,7 @@ public class Interpreter {
 
     public Interpreter() {}
 
-    public int interpret(String string) {
+    public void interpret(String string) {
         this.totalLines = 0;
         for (String line : string.split("[\\r\\n]+")) {
             this.totalLines++;
@@ -23,8 +23,8 @@ public class Interpreter {
             // split supplied string on newline characters, grouping newline and empty lines as delimiter
             this.interpretString(line);
         }
+    }
 
-        return 0;
     }
 
     private int interpretString(String string) {
