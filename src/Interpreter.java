@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,10 +10,11 @@ public class Interpreter {
     private int totalLines;
     private Boolean debug = false;
     private Boolean lastLineError = false;
+    private String output = "";
 
     public Interpreter() {}
 
-    public void interpret(String string) {
+    public String interpret(String string) {
         this.totalLines = 0;
         for (String line : string.split("[\\r\\n]+")) {
             this.totalLines++;
@@ -25,11 +27,13 @@ public class Interpreter {
             // split supplied string on newline characters, grouping newline and empty lines as delimiter
             this.interpretString(line);
         }
+
+        return this.output;
     }
 
-    public void interpret(String string, Boolean debug) {
+    public String interpret(String string, Boolean debug) {
         this.debug = debug;
-        interpret(string);
+        return interpret(string);
     }
 
     private void interpretString(String string) {
@@ -42,7 +46,7 @@ public class Interpreter {
             }
 
             if (this.debug) {
-                System.out.println("IN: " + segments);
+                this.printOutput("IN: " + segments);
             }
 
             if (this.lineNumber == 1 && !segments.get(0).equals("START")) {
@@ -117,8 +121,9 @@ public class Interpreter {
                 arguments = 1;
                 if (segments.size() == arguments + 1) {
                     if (variables.containsKey(segments.get(1))) {
-                        Scanner scanner = new Scanner(System.in);
-                        variables.put(segments.get(1), scanner.nextDouble());
+                        String input = JOptionPane.showInputDialog("Enter a value for " + segments.get(1));
+                        //Scanner scanner = new Scanner(System.in);
+                        variables.put(segments.get(1), Double.parseDouble(input));
                     } else {
                         this.printErrorAndExit("name " + segments.get(1) + " is not defined");
                     }
@@ -159,19 +164,21 @@ public class Interpreter {
                 }
             } else if (segments.get(0).equals("PRINT")) {
                 arguments = 1;
-                if (segments.get(1).charAt(0) == '(') {
+                if (segments.size() >= arguments + 1 && segments.get(1).charAt(0) == '(') {
+                    String functionOutput = "";
                     for (int i = 1; i < segments.size(); i++) {
                         if (i == 1) {
-                            String temp = segments.get(1).replaceFirst("[(]", "");
-                            System.out.print(temp + " ");
+                            String temp = segments.get(1).replaceAll("[(]", "");
+                            functionOutput = functionOutput + temp + " ";
                         } else if (i == segments.size() - 1) {
                             String temp = segments.get(segments.size() - 1).replaceAll("[)]", "");
-                            System.out.print(temp);
+                            functionOutput = functionOutput + temp;
                         } else {
-                            System.out.print(segments.get(i) + " ");
+                            functionOutput = functionOutput + segments.get(i) + " ";
                         }
                     }
-                    System.out.println();
+
+                    this.printOutput(functionOutput);
                 } else if (segments.size() == arguments + 1) {
                     if (variables.containsKey(segments.get(1))) {
                         this.printOutput(Double.toString(variables.get(segments.get(1))));
@@ -235,11 +242,11 @@ public class Interpreter {
     }
 
     private void printOutput(String output) {
-        System.out.println(output);
+        this.output = this.output + output + "\n";
     }
 
     private void printErrorAndExit(String error) {
         this.lastLineError = true;
-        System.out.println("ERROR (line " + this.lineNumber + "): " + error);
+        this.output = this.output + "ERROR (line " + this.lineNumber + "): " + error + "\n";
     }
 }
