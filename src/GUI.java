@@ -206,7 +206,7 @@ public class GUI extends JFrame implements ActionListener {
 
         JMenuItem debugMenuItem = new JMenuItem("Debug");
         debugMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
-        debugMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/resultset_next.png")));
+        debugMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/wrench.png")));
         debugMenuItem.addActionListener(this);
         debugMenuItem.setActionCommand("run_debug");
 
