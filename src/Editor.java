@@ -28,6 +28,17 @@ public class Editor extends JTabbedPane {
     public JEditorPane getTab(int index) {
         return this.editList.get(index);
     }
+    public JEditorPane getTab(String title) {
+    	for(int i = 0; i < this.editList.size(); i++)
+    	{
+    		if(title.equals(this.getTitleAt(i)));
+    		{
+    			return this.editList.get(i);
+    		}
+    	}
+    	return null;
+    }
+    
     
     public JEditorPane getLastTab() {
         return this.editList.get(this.tabList.size() - 1);
@@ -66,5 +77,17 @@ public class Editor extends JTabbedPane {
 		{
 			this.setSelectedIndex(0);
 		}
+	}
+	public void removeTab(String title) {
+		for(int i = 0; i < this.editList.size(); i++)
+    	{
+    		if(title.equals(this.getTitleAt(i)));
+    		{
+    			this.editList.remove(i);
+    			this.tabList.remove(i);
+    			this.removeTabAt(i);
+    			break;
+    		}
+    	}
 	}
 }
