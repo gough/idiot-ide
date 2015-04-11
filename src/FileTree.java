@@ -7,11 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JTree;
-import javax.swing.event.TreeModelEvent;
-import javax.swing.event.TreeModelListener;
+
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
@@ -71,18 +68,27 @@ public class FileTree extends JTree implements MouseListener
 	
 	public void addNode(DefaultMutableTreeNode node)
 	{
-		
-		this.model.insertNodeInto(node, rootNode, rootNode.getChildCount());
-		this.expandRow(this.getRowCount()-1);
-		this.nodeCount += 1;
-		this.saveFileTree();
+		boolean found = false;
+		for(int i = 0; i < this.nodeCount; i++)
+		{
+			if(this.rootNode.getChildAt(i).toString().equals(node.toString()))
+			{
+				found = true;
+			}
+		}
+		if(!found)
+		{
+			this.model.insertNodeInto(node, rootNode, rootNode.getChildCount());
+			this.expandRow(this.getRowCount()-1);
+			this.nodeCount += 1;
+			this.saveFileTree();
+		}
 	}
 	public void removeNode(DefaultMutableTreeNode node)
 	{
 		
 		for(int i = 0; i < this.nodeCount; i++)
 		{
-			System.out.println(this.rootNode.getChildAt(i) + " = " + node);
 			if(this.rootNode.getChildAt(i).toString().equals(node.toString()))
 			{
 				this.model.removeNodeFromParent((MutableTreeNode) this.rootNode.getChildAt(i));
@@ -116,30 +122,43 @@ public class FileTree extends JTree implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getClickCount() == 2) {
-			System.out.println("double click");
+			//System.out.println("double click");
 			File file = new File(this.getLastSelectedPathComponent().toString());
 			String fileContents = "";
-
-			try {
-				BufferedReader bufferedReader = new BufferedReader(
-				new FileReader(file));
-
-				String line;
-				while ((line = bufferedReader.readLine()) != null) {
-					fileContents = fileContents + line + "\n";
-				}
-				bufferedReader.close();
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
+			
+			if(Main.getGUI().getEditor().indexOfTab(this.getLastSelectedPathComponent().toString().substring(this.getLastSelectedPathComponent().toString().lastIndexOf('/'))) != -1)
+			{
+				Main.getGUI().getEditor().setSelectedIndex(Main.getGUI().getEditor().indexOfTab(this.getLastSelectedPathComponent().toString().substring(this.getLastSelectedPathComponent().toString().lastIndexOf('/'))));
 			}
-			Main.getGUI().getEditor().newTab(file.getPath().split("/")[file.getPath().split("/").length - 1]);
-			Main.getGUI().getEditor().getLastTab().setText(fileContents);
+			
+			else
+			{
+				try {
+					BufferedReader bufferedReader = new BufferedReader(
+							new FileReader(file));
 
-			Main.getGUI().getEditor().setLastSaveDirectory(file.getAbsolutePath(),
-			Main.getGUI().getEditor().getIndexOfLastTab());
-			System.out.println(Main.getGUI().getEditor().getLastSaveDirectory(Main.getGUI().getEditor().getSelectedIndex()));
+					String line;
+					while ((line = bufferedReader.readLine()) != null) {
+						fileContents = fileContents + line + "\n";
+					}
+					bufferedReader.close();
+				} catch (FileNotFoundException e1) {
+					//e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				if(Main.getGUI().getEditor().indexOfTab(file.getPath().split("/")[file.getPath().split("/").length - 1]) != -1)
+				{
+					Main.getGUI().getEditor().setSelectedIndex(Main.getGUI().getEditor().indexOfTab(file.getPath().split("/")[file.getPath().split("/").length - 1]));
+				}
+				else
+				{
+					Main.getGUI().getEditor().newTab(file.getPath().split("/")[file.getPath().split("/").length - 1]);
+					Main.getGUI().getEditor().getLastTab().setText(fileContents);
+					Main.getGUI().getEditor().setLastSaveDirectory(file.getAbsolutePath(),Main.getGUI().getEditor().getIndexOfLastTab());
+					//System.out.println(Main.getGUI().getEditor().getLastSaveDirectory(Main.getGUI().getEditor().getSelectedIndex()));
+				}
+			}
 		}
 	}
 	@Override
