@@ -60,8 +60,8 @@ public class Interpreter {
             if (segments.get(0).equals("ADD")) {
                 arguments = 3;
                 if (segments.size() == arguments + 1) {
-                    if (variables.containsKey(segments.get(1))) {
-                        if (variables.containsKey(segments.get(2))) {
+                    if (variables.containsKey(segments.get(1)) && variables.containsValue(segments.get(1))) {
+                        if (variables.containsKey(segments.get(2)) && variables.containsValue(segments.get(2))) {
                             if (variables.containsKey(segments.get(3))) {
                                 variables.put(segments.get(3), variables.get(segments.get(1)) + variables.get(segments.get(2)));
                                 this.printDebugOutput("ADD " + segments.get(1) + " to " + segments.get(2) + " and set to " + segments.get(3));
@@ -69,10 +69,10 @@ public class Interpreter {
                                 this.printErrorAndExit("name " + segments.get(3) + " is not defined");
                             }
                         } else {
-                            this.printErrorAndExit("name " + segments.get(2) + " is not defined");
+                            this.printErrorAndExit("name " + segments.get(2) + " is not defined or null");
                         }
                     } else {
-                        this.printErrorAndExit("name " + segments.get(1) + " is not defined");
+                        this.printErrorAndExit("name " + segments.get(1) + " is not defined or null");
                     }
                 } else {
                     this.printErrorAndExit("ADD takes exactly " + arguments + " arguments (" + (segments.size() - 1) + " given)");
@@ -94,8 +94,8 @@ public class Interpreter {
             } else if (segments.get(0).equals("DIV")) {
                 arguments = 3;
                 if (segments.size() == arguments + 1) {
-                    if (variables.containsKey(segments.get(1))) {
-                        if (variables.containsKey(segments.get(2))) {
+                    if (variables.containsKey(segments.get(1)) && variables.containsValue(segments.get(1))) {
+                        if (variables.containsKey(segments.get(2)) && variables.containsValue(segments.get(2))) {
                             if (variables.containsKey(segments.get(3))) {
                                 variables.put(segments.get(3), variables.get(segments.get(1)) / variables.get(segments.get(2)));
                                 this.printDebugOutput("DIV " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
@@ -103,10 +103,10 @@ public class Interpreter {
                                 this.printErrorAndExit("name " + segments.get(3) + " is not defined");
                             }
                         } else {
-                            this.printErrorAndExit("name " + segments.get(2) + " is not defined");
+                            this.printErrorAndExit("name " + segments.get(2) + " is not defined or null");
                         }
                     } else {
-                        this.printErrorAndExit("name " + segments.get(1) + " is not defined");
+                        this.printErrorAndExit("name " + segments.get(1) + " is not defined or null");
                     }
                 } else {
                     this.printErrorAndExit("DIV takes exactly " + arguments + " arguments (" + (segments.size() - 1) + " given)");
@@ -120,9 +120,13 @@ public class Interpreter {
                 arguments = 1;
                 if (segments.size() == arguments + 1) {
                     if (variables.containsKey(segments.get(1))) {
-                        String input = JOptionPane.showInputDialog("Enter a value for " + segments.get(1));
-                        //Scanner scanner = new Scanner(System.in);
-                        variables.put(segments.get(1), Double.parseDouble(input));
+                        try {
+                            String input = JOptionPane.showInputDialog("Enter a value for " + segments.get(1));
+                            //Scanner scanner = new Scanner(System.in);
+                            variables.put(segments.get(1), Double.parseDouble(input));
+                        } catch (java.lang.NumberFormatException e) {
+                            this.printErrorAndExit("ENTER takes number values only");
+                        }
                     } else {
                         this.printErrorAndExit("name " + segments.get(1) + " is not defined");
                     }
@@ -144,8 +148,8 @@ public class Interpreter {
             } else if (segments.get(0).equals("MUL")) {
                 arguments = 3;
                 if (segments.size() == arguments + 1) {
-                    if (variables.containsKey(segments.get(1))) {
-                        if (variables.containsKey(segments.get(2))) {
+                    if (variables.containsKey(segments.get(1)) && variables.containsValue(segments.get(1))) {
+                        if (variables.containsKey(segments.get(2)) && variables.containsValue(segments.get(2))) {
                             if (variables.containsKey(segments.get(3))) {
                                 variables.put(segments.get(3), variables.get(segments.get(1)) * variables.get(segments.get(2)));
                                 this.printDebugOutput("MUL " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
@@ -153,10 +157,10 @@ public class Interpreter {
                                 this.printErrorAndExit("name " + segments.get(3) + " is not defined");
                             }
                         } else {
-                            this.printErrorAndExit("name " + segments.get(2) + " is not defined");
+                            this.printErrorAndExit("name " + segments.get(2) + " is not defined or null");
                         }
                     } else {
-                        this.printErrorAndExit("name " + segments.get(1) + " is not defined");
+                        this.printErrorAndExit("name " + segments.get(1) + " is not defined or null");
                     }
                 } else {
                     this.printErrorAndExit("MUL takes exactly " + arguments + " arguments (" + (segments.size() - 1) + " given)");
@@ -195,8 +199,8 @@ public class Interpreter {
             } else if (segments.get(0).equals("SUB")) {
                 arguments = 3;
                 if (segments.size() == arguments + 1) {
-                    if (variables.containsKey(segments.get(1))) {
-                        if (variables.containsKey(segments.get(2))) {
+                    if (variables.containsKey(segments.get(1)) && variables.containsValue(segments.get(1))) {
+                        if (variables.containsKey(segments.get(2)) && variables.containsValue(segments.get(2))) {
                             if (variables.containsKey(segments.get(3))) {
                                 variables.put(segments.get(3), variables.get(segments.get(1)) - variables.get(segments.get(2)));
                                 this.printDebugOutput("SUB " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
@@ -204,10 +208,10 @@ public class Interpreter {
                                 this.printErrorAndExit("name " + segments.get(3) + " is not defined");
                             }
                         } else {
-                            this.printErrorAndExit("name " + segments.get(2) + " is not defined");
+                            this.printErrorAndExit("name " + segments.get(2) + " is not defined or null");
                         }
                     } else {
-                        this.printErrorAndExit("name " + segments.get(1) + " is not defined");
+                        this.printErrorAndExit("name " + segments.get(1) + " is not defined or null");
                     }
                 } else {
                     this.printErrorAndExit("SUB takes exactly " + arguments + " arguments (" + (segments.size() - 1) + " given)");
