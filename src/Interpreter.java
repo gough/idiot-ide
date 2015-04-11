@@ -7,6 +7,7 @@ public class Interpreter {
     private Map<String, Double> variables = new HashMap<String, Double>();
     private int lineNumber;
     private int totalLines;
+    private Boolean debug = false;
 
     public Interpreter() {}
 
@@ -25,6 +26,9 @@ public class Interpreter {
         }
     }
 
+    public void interpret(String string, Boolean debug) {
+        this.debug = debug;
+        interpret(string);
     }
 
     private int interpretString(String string) {
@@ -35,7 +39,9 @@ public class Interpreter {
             segments.add(split_string);
         }
 
-        System.out.println("IN: " + segments);
+        if (this.debug) {
+            System.out.println("IN: " + segments);
+        }
 
 
         if (this.lineNumber == 1 && !segments.get(0).equals("START")) {
@@ -54,7 +60,7 @@ public class Interpreter {
                     if (variables.containsKey(segments.get(2))) {
                         if (variables.containsKey(segments.get(3))) {
                             variables.put(segments.get(3), variables.get(segments.get(1)) + variables.get(segments.get(2)));
-                            this.printOutput("ADD " + segments.get(1) + " to " + segments.get(2) + " and set to " + segments.get(3));
+                            this.printDebugOutput("ADD " + segments.get(1) + " to " + segments.get(2) + " and set to " + segments.get(3));
                         } else {
                             this.printErrorAndExit("name " + segments.get(3) + " is not defined");
                         }
@@ -72,7 +78,7 @@ public class Interpreter {
             if (segments.size() == arguments + 1) {
                 if (variables.containsKey(segments.get(1))) {
                     variables.put(segments.get(1), Double.parseDouble(segments.get(2)));
-                    this.printOutput("ASSIGN " + segments.get(2) + " to " + segments.get(1));
+                    this.printDebugOutput("ASSIGN " + segments.get(2) + " to " + segments.get(1));
                 } else {
                     this.printErrorAndExit("name " + segments.get(1) + " is not defined");
                 }
@@ -88,7 +94,7 @@ public class Interpreter {
                     if (variables.containsKey(segments.get(2))) {
                         if (variables.containsKey(segments.get(3))) {
                             variables.put(segments.get(3), variables.get(segments.get(1)) / variables.get(segments.get(2)));
-                            this.printOutput("DIV " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
+                            this.printDebugOutput("DIV " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
                         } else {
                             this.printErrorAndExit("name " + segments.get(3) + " is not defined");
                         }
@@ -123,7 +129,7 @@ public class Interpreter {
             if (segments.size() == arguments + 1) {
                 if (variables.containsKey(segments.get(1))) {
                     variables.put(segments.get(1), variables.get(segments.get(1)) + 1);
-                    this.printOutput("INC " + segments.get(1) + " by 1");
+                    this.printDebugOutput("INC " + segments.get(1) + " by 1");
                 } else {
                     this.printErrorAndExit("name " + segments.get(2) + " is not defined");
                 }
@@ -137,7 +143,7 @@ public class Interpreter {
                     if (variables.containsKey(segments.get(2))) {
                         if (variables.containsKey(segments.get(3))) {
                             variables.put(segments.get(3), variables.get(segments.get(1)) * variables.get(segments.get(2)));
-                            this.printOutput("MUL " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
+                            this.printDebugOutput("MUL " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
                         } else {
                             this.printErrorAndExit("name " + segments.get(3) + " is not defined");
                         }
@@ -173,7 +179,7 @@ public class Interpreter {
                     if (variables.containsKey(segments.get(2))) {
                         if (variables.containsKey(segments.get(3))) {
                             variables.put(segments.get(3), variables.get(segments.get(1)) - variables.get(segments.get(2)));
-                            this.printOutput("SUB " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
+                            this.printDebugOutput("SUB " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
                         } else {
                             this.printErrorAndExit("name " + segments.get(3) + " is not defined");
                         }
@@ -192,7 +198,7 @@ public class Interpreter {
                 if (!variables.containsKey(segments.get(1))) {
                     if (!Character.isDigit(segments.get(1).charAt(0))) {
                         variables.put(segments.get(1), null);
-                        this.printOutput("var " + segments.get(1) + " defined");
+                        this.printDebugOutput("var " + segments.get(1) + " defined");
                     } else {
                         this.printErrorAndExit("variable name cannot start with a digit");
                     }
@@ -209,8 +215,14 @@ public class Interpreter {
         return 0;
     }
 
+    private void printDebugOutput(String output) {
+        if (this.debug) {
+            this.printOutput("OUT: " + output);
+        }
+    }
+
     private void printOutput(String output) {
-        System.out.println("OUT: " + output);
+        System.out.println(output);
     }
 
     private void printErrorAndExit(String error) {
