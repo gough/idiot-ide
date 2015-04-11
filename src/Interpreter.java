@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Interpreter {
     private Map<String, Double> variables = new HashMap<String, Double>();
