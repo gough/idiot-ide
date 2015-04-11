@@ -569,5 +569,9 @@ public class GUI extends JFrame implements ActionListener {
 					+ "FamFamFam, 2015");
 		}
 	}
+	public Editor getEditor()
+	{
+		return this.editor;
+	}
 	
 }

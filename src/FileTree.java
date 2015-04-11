@@ -1,3 +1,5 @@
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +17,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
-public class FileTree extends JTree
+public class FileTree extends JTree implements MouseListener
 {
 	private DefaultMutableTreeNode rootNode;
 	private DefaultTreeModel model;
@@ -30,6 +32,7 @@ public class FileTree extends JTree
 		this.setShowsRootHandles(true);
 		model = (DefaultTreeModel) this.getModel();
 		rootNode = (DefaultMutableTreeNode) model.getRoot();
+		this.addMouseListener(this);
 		this.fileHistory = new File("File_Data");
 		try
 		{
@@ -109,5 +112,54 @@ public class FileTree extends JTree
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (e.getClickCount() == 2) {
+			System.out.println("double click");
+			File file = new File(this.getLastSelectedPathComponent().toString());
+			String fileContents = "";
+
+			try {
+				BufferedReader bufferedReader = new BufferedReader(
+				new FileReader(file));
+
+				String line;
+				while ((line = bufferedReader.readLine()) != null) {
+					fileContents = fileContents + line + "\n";
+				}
+				bufferedReader.close();
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			Main.getGUI().getEditor().newTab(file.getPath().split("/")[file.getPath().split("/").length - 1]);
+			Main.getGUI().getEditor().getLastTab().setText(fileContents);
+
+			Main.getGUI().getEditor().setLastSaveDirectory(file.getAbsolutePath(),
+			Main.getGUI().getEditor().getIndexOfLastTab());
+			System.out.println(Main.getGUI().getEditor().getLastSaveDirectory(Main.getGUI().getEditor().getSelectedIndex()));
+		}
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
