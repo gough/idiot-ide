@@ -94,12 +94,9 @@ public class FileTree extends JTree implements MouseListener, ActionListener
 	}
 	public void removeNode(DefaultMutableTreeNode node)
 	{
-		System.out.println(nodeCount);
 		
 		for(int i = 0; i < this.nodeCount; i++)
 		{
-			System.out.println(this.rootNode.getChildAt(i).toString()+"-------------");
-			System.out.println(node.toString()+ "++++++++++++++");
 			if(this.rootNode.getChildAt(i).toString().equals(node.toString()))
 			{
 				this.model.removeNodeFromParent((MutableTreeNode) this.rootNode.getChildAt(i));
@@ -133,15 +130,23 @@ public class FileTree extends JTree implements MouseListener, ActionListener
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		JPopupMenu menu = new JPopupMenu();
-		JMenuItem open = new JMenuItem("Open");
+		
+		JMenuItem open = new JMenuItem("Open Selected");
 		open.addActionListener(this);
 		open.setActionCommand("file_open");
-		JMenuItem delete = new JMenuItem("Delete");
+		
+		JMenuItem delete = new JMenuItem("Delete Selected");
 		delete.addActionListener(this);
 		delete.setActionCommand("file_delete");
 		
+		JMenuItem newFile = new JMenuItem("New File");
+		newFile.addActionListener(this);
+		newFile.setActionCommand("file_new");
+		
 		menu.add(open);
 		menu.add(delete);
+		menu.add(newFile);
+		
 		if (e.getClickCount() == 2 && e.getButton() != e.BUTTON3) {
 			//System.out.println("double click");
 			File file = new File(this.getLastSelectedPathComponent().toString());
@@ -316,6 +321,20 @@ public class FileTree extends JTree implements MouseListener, ActionListener
 				System.out.println((DefaultMutableTreeNode)this.getLastSelectedPathComponent());
 				this.removeNode((DefaultMutableTreeNode)this.getLastSelectedPathComponent());
 			}
+		}
+		else if(action.equals("file_new"))
+		{
+			String title = "";
+			while (title.length() < 1) {
+				title = JOptionPane.showInputDialog("Enter a new file name:");
+				if (title.length() < 1) {
+					JOptionPane.showMessageDialog(null,
+							"Please enter a valid file name.");
+				}
+				this.addNode(new DefaultMutableTreeNode(new File(System.getProperty("user.home")+ File.separator + title + ".idiot")));
+			}
+
+			Main.getGUI().getEditor().newTab(title + ".idiot");
 		}
 	}
 }
