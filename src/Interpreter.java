@@ -167,10 +167,10 @@ public class Interpreter {
                     String functionOutput = "";
                     for (int i = 1; i < segments.size(); i++) {
                         if (i == 1) {
-                            String temp = segments.get(1).replaceAll("[(]", "");
+                            String temp = segments.get(1).replaceAll("[()]", "");
                             functionOutput = functionOutput + temp + " ";
                         } else if (i == segments.size() - 1) {
-                            String temp = segments.get(segments.size() - 1).replaceAll("[)]", "");
+                            String temp = segments.get(segments.size() - 1).replaceAll("[()]", "");
                             functionOutput = functionOutput + temp;
                         } else {
                             functionOutput = functionOutput + segments.get(i) + " ";
