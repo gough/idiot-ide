@@ -305,6 +305,8 @@ public class GUI extends JFrame implements ActionListener {
 		JButton runToolBarButton = new JButton("Run");
 		runToolBarButton.setIcon(new ImageIcon(getClass().getResource(
 				"icons/resultset_next.png")));
+        runToolBarButton.addActionListener(this);
+        runToolBarButton.setActionCommand("run_run");
 
 		toolBar.add(newToolBarButton);
 		toolBar.add(openToolBarButton);
