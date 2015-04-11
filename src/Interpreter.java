@@ -60,8 +60,8 @@ public class Interpreter {
             if (segments.get(0).equals("ADD")) {
                 arguments = 3;
                 if (segments.size() == arguments + 1) {
-                    if (variables.containsKey(segments.get(1)) && variables.containsValue(segments.get(1))) {
-                        if (variables.containsKey(segments.get(2)) && variables.containsValue(segments.get(2))) {
+                    if (variables.containsKey(segments.get(1)) && (variables.get(segments.get(1))) != null) {
+                        if (variables.containsKey(segments.get(2)) && (variables.get(segments.get(2))) != null) {
                             if (variables.containsKey(segments.get(3))) {
                                 variables.put(segments.get(3), variables.get(segments.get(1)) + variables.get(segments.get(2)));
                                 this.printDebugOutput("ADD " + segments.get(1) + " to " + segments.get(2) + " and set to " + segments.get(3));
@@ -94,8 +94,8 @@ public class Interpreter {
             } else if (segments.get(0).equals("DIV")) {
                 arguments = 3;
                 if (segments.size() == arguments + 1) {
-                    if (variables.containsKey(segments.get(1)) && variables.containsValue(segments.get(1))) {
-                        if (variables.containsKey(segments.get(2)) && variables.containsValue(segments.get(2))) {
+                    if (variables.containsKey(segments.get(1)) && (variables.get(segments.get(1))) != null) {
+                        if (variables.containsKey(segments.get(2)) && (variables.get(segments.get(2))) != null) {
                             if (variables.containsKey(segments.get(3))) {
                                 variables.put(segments.get(3), variables.get(segments.get(1)) / variables.get(segments.get(2)));
                                 this.printDebugOutput("DIV " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
@@ -148,8 +148,8 @@ public class Interpreter {
             } else if (segments.get(0).equals("MUL")) {
                 arguments = 3;
                 if (segments.size() == arguments + 1) {
-                    if (variables.containsKey(segments.get(1)) && variables.containsValue(segments.get(1))) {
-                        if (variables.containsKey(segments.get(2)) && variables.containsValue(segments.get(2))) {
+                    if (variables.containsKey(segments.get(1)) && (variables.get(segments.get(1))) != null) {
+                        if (variables.containsKey(segments.get(2)) && (variables.get(segments.get(2))) != null) {
                             if (variables.containsKey(segments.get(3))) {
                                 variables.put(segments.get(3), variables.get(segments.get(1)) * variables.get(segments.get(2)));
                                 this.printDebugOutput("MUL " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
@@ -199,8 +199,8 @@ public class Interpreter {
             } else if (segments.get(0).equals("SUB")) {
                 arguments = 3;
                 if (segments.size() == arguments + 1) {
-                    if (variables.containsKey(segments.get(1)) && variables.containsValue(segments.get(1))) {
-                        if (variables.containsKey(segments.get(2)) && variables.containsValue(segments.get(2))) {
+                    if (variables.containsKey(segments.get(1)) && (variables.get(segments.get(1))) != null) {
+                        if (variables.containsKey(segments.get(2)) && (variables.get(segments.get(2))) != null) {
                             if (variables.containsKey(segments.get(3))) {
                                 variables.put(segments.get(3), variables.get(segments.get(1)) - variables.get(segments.get(2)));
                                 this.printDebugOutput("SUB " + segments.get(1) + " by " + segments.get(2) + " and set to " + segments.get(3));
