@@ -19,6 +19,7 @@ public class GUI extends JFrame implements ActionListener {
 	private Editor editor = null;
 	private JFileChooser fileChooser = new JFileChooser();
 	private FileTree fileTree = new FileTree();
+    private JEditorPane consolePane;
 
 	public GUI(String title, int width, int height) {
 		// call JFrame constructor to create frame with our title
@@ -342,11 +343,11 @@ public class GUI extends JFrame implements ActionListener {
 		JTabbedPane bottomTabbedPane = new JTabbedPane();
 
 		// JEditorPane(s) used as a placeholder, could be changed in future
-		JEditorPane consolePane = new JEditorPane();
-		
+		this.consolePane = new JEditorPane();
+        this.consolePane.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
+        this.consolePane.setFont(new Font("Monaco", 0, 14));
 
 		bottomTabbedPane.add(consolePane, "Console");
-		
 
 		rightSplitPane.add(this.editor);
 		rightSplitPane.add(bottomTabbedPane);
@@ -562,10 +563,10 @@ public class GUI extends JFrame implements ActionListener {
 
         if (action.equals("run_run")) {
             Interpreter interpreter = new Interpreter();
-            interpreter.interpret(editor.getActiveTab().getText());
+            this.setConsoleText(interpreter.interpret(editor.getActiveTab().getText()));
         } else if (action.equals("run_debug")) {
             Interpreter interpreter = new Interpreter();
-            interpreter.interpret(editor.getActiveTab().getText(), true);
+            this.setConsoleText(interpreter.interpret(editor.getActiveTab().getText(), true));
         }
 
 		if (action.equals("help_viewHelp")) {
@@ -597,9 +598,18 @@ public class GUI extends JFrame implements ActionListener {
 					+ "FamFamFam, 2015");
 		}
 	}
+
 	public Editor getEditor()
 	{
 		return this.editor;
 	}
+
+    public void setConsoleText(String string) {
+        this.consolePane.setText(string);
+    }
+
+    public String getConsoleText() {
+        return this.consolePane.getText();
+    }
 	
 }
