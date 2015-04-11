@@ -30,14 +30,14 @@ public class FileTree extends JTree implements MouseListener, ActionListener
 	
 	public FileTree()
 	{
-		super(new DefaultMutableTreeNode("files"));
+		super(new DefaultMutableTreeNode("Files"));
 		this.setEditable(false);
 		this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		this.setShowsRootHandles(true);
 		model = (DefaultTreeModel) this.getModel();
 		rootNode = (DefaultMutableTreeNode) model.getRoot();
 		this.addMouseListener(this);
-		this.fileHistory = new File("File_Data");
+		this.fileHistory = new File("file_history");
 		try
 		{
 			if(fileHistory.exists())
