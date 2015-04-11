@@ -195,6 +195,23 @@ public class GUI extends JFrame implements ActionListener {
 		editMenu.add(new JSeparator());
 		//editMenu.add(selectAllMenuItem);
 
+        JMenu runMenu = new JMenu("Run");
+
+        JMenuItem runMenuItem = new JMenuItem("Run");
+        runMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.CTRL_MASK));
+        runMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/resultset_next.png")));
+        runMenuItem.addActionListener(this);
+        runMenuItem.setActionCommand("run_run");
+
+        JMenuItem debugMenuItem = new JMenuItem("Debug");
+        debugMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
+        debugMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/resultset_next.png")));
+        debugMenuItem.addActionListener(this);
+        debugMenuItem.setActionCommand("run_debug");
+
+        runMenu.add(runMenuItem);
+        runMenu.add(debugMenuItem);
+
 		JMenu helpMenu = new JMenu("Help");
 
 		JMenuItem viewHelpMenuItem = new JMenuItem("View Help");
@@ -218,6 +235,7 @@ public class GUI extends JFrame implements ActionListener {
 
 		menuBar.add(fileMenu);
 		menuBar.add(editMenu);
+        menuBar.add(runMenu);
 		menuBar.add(helpMenu);
 
 		this.setJMenuBar(menuBar);
@@ -539,6 +557,14 @@ public class GUI extends JFrame implements ActionListener {
 		} else if (action.equals("edit_selectAll")) {
 			JOptionPane.showMessageDialog(null, "edit_selectAll");
 		}
+
+        if (action.equals("run_run")) {
+            Interpreter interpreter = new Interpreter();
+            interpreter.interpret(editor.getActiveTab().getText());
+        } else if (action.equals("run_debug")) {
+            Interpreter interpreter = new Interpreter();
+            interpreter.interpret(editor.getActiveTab().getText(), true);
+        }
 
 		if (action.equals("help_viewHelp")) {
 
