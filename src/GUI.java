@@ -518,11 +518,11 @@ public class GUI extends JFrame implements ActionListener {
 			PrinterJob printerJob = PrinterJob.getPrinterJob();
 			printerJob.printDialog();
 		} else if (action.equals("file_quit")) {
-			String[] buttons = { "Yes, exit.", "Save and Exit", "Cancel" };
+			String[] buttons = { "Exit without saving", "Save and exit", "Cancel" };
 			int warnopt = JOptionPane
 					.showOptionDialog(
 							null,
-							"Are you sure you want to exit this program?\n All unsaved progress will be lost.",
+							"Are you sure you want to exit this program?\nAll unsaved progress will be lost.",
 							"Warning", JOptionPane.WARNING_MESSAGE, 0, null,
 							buttons, buttons[1]);
 
