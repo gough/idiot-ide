@@ -561,11 +561,19 @@ public class GUI extends JFrame implements ActionListener {
 		}
 
         if (action.equals("run_run")) {
-            Interpreter interpreter = new Interpreter();
-            this.setConsoleText(interpreter.interpret(editor.getActiveTab().getText()));
+            try {
+                Interpreter interpreter = new Interpreter();
+                this.setConsoleText(interpreter.interpret(editor.getActiveTab().getText()));
+            } catch (ArrayIndexOutOfBoundsException e1) {
+                JOptionPane.showMessageDialog(null, "There is no file open to run. Please open a file and try again.");
+            }
         } else if (action.equals("run_debug")) {
-            Interpreter interpreter = new Interpreter();
-            this.setConsoleText(interpreter.interpret(editor.getActiveTab().getText(), true));
+            try {
+                Interpreter interpreter = new Interpreter();
+                this.setConsoleText(interpreter.interpret(editor.getActiveTab().getText(), true));
+            } catch (ArrayIndexOutOfBoundsException e1) {
+                JOptionPane.showMessageDialog(null, "There is no file open to debug. Please open a file and try again.");
+            }
         }
 
 		if (action.equals("help_viewHelp")) {
