@@ -192,7 +192,7 @@ public class GUI extends JFrame implements ActionListener {
 		editMenu.add(cutMenuItem);
 		editMenu.add(copyMenuItem);
 		editMenu.add(pasteMenuItem);
-		editMenu.add(new JSeparator());
+		//editMenu.add(new JSeparator());
 		//editMenu.add(selectAllMenuItem);
 
         JMenu runMenu = new JMenu("Run");
