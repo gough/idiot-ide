@@ -613,7 +613,7 @@ public class GUI extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Version 4.0 \n" + "\n"
 					+ "Created By: \n" + "Ben Potter, \n" + "Adam Gough, \n"
 					+ "Keylan Norum, \n" + "Kaori Millar, \n"
-					+ "Kuan Heng Kuo \n" + "\n" + "Icons provided by: \n"
+					+ "Linus Kuo \n" + "\n" + "Icons provided by: \n"
 					+ "http://www.famfamfam.com/lab/icons/silk/\n"
 					+ "FamFamFam, 2015");
 		}
