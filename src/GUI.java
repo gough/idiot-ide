@@ -570,25 +570,34 @@ public class GUI extends JFrame implements ActionListener {
         }
 
 		if (action.equals("help_viewHelp")) {
+            Desktop desktop = Desktop.getDesktop();
+            InputStream in = getClass().getResourceAsStream("pdf/user_manual.pdf");
 
-			 try {
-				 
-					File pdfFile = new File("/home/potterb/Downloads/Lab 1.pdf");
-					if (pdfFile.exists()) {
-			 
-						if (Desktop.isDesktopSupported()) {
-							Desktop.getDesktop().open(pdfFile);
-						} else {
-							System.out.println("Awt Desktop is not supported!");
-						}
-			 
-					} else {
-						System.out.println("File does not exist.");
-					}
-			 
-				  } catch (Exception ex) {
-					ex.printStackTrace();
-				  }
+            try {
+                File file = File.createTempFile("user_manual", ".pdf");
+                file.deleteOnExit();
+                OutputStream out = new FileOutputStream(file);
+                try {
+                    byte[] buffer = new byte[1024];
+                    int len;
+                    while ((len = in.read(buffer)) != -1) {
+                        out.write(buffer, 0, len);
+                    }
+                } finally {
+                    out.close();
+                }
+                desktop.open(file);
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } finally {
+                try {
+                    in.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
 		} else if (action.equals("help_about")) {
 			JOptionPane.showMessageDialog(null, "Version 4.0 \n" + "\n"
 					+ "Created By: \n" + "Ben Potter, \n" + "Adam Gough, \n"
