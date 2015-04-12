@@ -222,7 +222,7 @@ public class GUI extends JFrame implements ActionListener {
 		viewHelpMenuItem.addActionListener(this);
 		viewHelpMenuItem.setActionCommand("help_viewHelp");
 
-		JMenuItem aboutMenuItem = new JMenuItem("About My IDE");
+		JMenuItem aboutMenuItem = new JMenuItem("About IDIOT IDE");
 		aboutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
 				ActionEvent.CTRL_MASK));
 		aboutMenuItem.setIcon(new ImageIcon(getClass().getResource(
