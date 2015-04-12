@@ -36,7 +36,7 @@ public class FileTree extends JTree implements MouseListener, ActionListener
 		model = (DefaultTreeModel) this.getModel();
 		rootNode = (DefaultMutableTreeNode) model.getRoot();
 		this.addMouseListener(this);
-		this.fileHistory = new File("file_history");
+		this.fileHistory = new File("file_history.txt");
 		try
 		{
 			if(fileHistory.exists())
