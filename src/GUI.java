@@ -313,10 +313,13 @@ public class GUI extends JFrame implements ActionListener {
 		toolBar.add(closeToolBarButton);
 		toolBar.add(saveToolBarButton);
 		toolBar.add(saveAsToolBarButton);
+        toolBar.addSeparator();
 		toolBar.add(printToolBarButton);
+        toolBar.addSeparator();
 		toolBar.add(cutToolBarButton);
 		toolBar.add(copyToolBarButton);
 		toolBar.add(pasteToolBarButton);
+        toolBar.addSeparator();
 		toolBar.add(runToolBarButton);
 
 		pane.add(toolBar, BorderLayout.NORTH);
