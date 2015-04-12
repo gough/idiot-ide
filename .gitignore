@@ -17,5 +17,7 @@ hs_err_pid*
 
 # output directory
 out/
+
+# configuration files
 src/META-INF
-file_history
+file_history.txt
