@@ -46,7 +46,7 @@ public class Interpreter {
             }
 
             if (this.debug) {
-                this.printOutput("IN: " + segments);
+                this.printInput("" + segments);
             }
 
             if (this.lineNumber == 1 && !segments.get(0).equals("START")) {
@@ -241,12 +241,22 @@ public class Interpreter {
 
     private void printDebugOutput(String output) {
         if (this.debug) {
-            this.printOutput("OUT: " + output);
+            this.output = this.output + "DEBUG: " + output + "\n";
+        }
+    }
+
+    private void printInput(String input) {
+        if (this.debug) {
+            this.output = this.output + "IN: " + input + "\n";
         }
     }
 
     private void printOutput(String output) {
-        this.output = this.output + output + "\n";
+        if (this.debug) {
+            this.output = this.output + "OUT: " + output + "\n";
+        } else {
+            this.output = this.output + output + "\n";
+        }
     }
 
     private void printErrorAndExit(String error) {
