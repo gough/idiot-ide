@@ -91,7 +91,7 @@ public class GUI extends JFrame implements ActionListener {
 		newMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
 				ActionEvent.CTRL_MASK));
 		newMenuItem.setIcon(new ImageIcon(getClass().getResource(
-				"icons/page_add.png")));
+                "img/page_add.png")));
 		newMenuItem.addActionListener(this);
 		newMenuItem.setActionCommand("file_new");
 
@@ -99,7 +99,7 @@ public class GUI extends JFrame implements ActionListener {
 		openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 				ActionEvent.CTRL_MASK));
 		openMenuItem.setIcon(new ImageIcon(getClass().getResource(
-				"icons/folder_page.png")));
+                "img/folder_page.png")));
 		openMenuItem.addActionListener(this);
 		openMenuItem.setActionCommand("file_open");
 		
@@ -107,7 +107,7 @@ public class GUI extends JFrame implements ActionListener {
 		closeMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,
 				ActionEvent.CTRL_MASK));
 		closeMenuItem.setIcon(new ImageIcon(getClass().getResource(
-				"icons/application_delete.png")));
+                "img/application_delete.png")));
 		closeMenuItem.addActionListener(this);
 		closeMenuItem.setActionCommand("file_close");
 
@@ -115,7 +115,7 @@ public class GUI extends JFrame implements ActionListener {
 		saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 				ActionEvent.CTRL_MASK));
 		saveMenuItem.setIcon(new ImageIcon(getClass().getResource(
-				"icons/disk.png")));
+                "img/disk.png")));
 		saveMenuItem.addActionListener(this);
 		saveMenuItem.setActionCommand("file_save");
 
@@ -123,7 +123,7 @@ public class GUI extends JFrame implements ActionListener {
 		saveAsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
 		saveAsMenuItem.setIcon(new ImageIcon(getClass().getResource(
-				"icons/page_save.png")));
+                "img/page_save.png")));
 		saveAsMenuItem.addActionListener(this);
 		saveAsMenuItem.setActionCommand("file_saveAs");
 
@@ -131,7 +131,7 @@ public class GUI extends JFrame implements ActionListener {
 		printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
 				ActionEvent.CTRL_MASK));
 		printMenuItem.setIcon(new ImageIcon(getClass().getResource(
-				"icons/printer.png")));
+                "img/printer.png")));
 		printMenuItem.addActionListener(this);
 		printMenuItem.setActionCommand("file_print");
 
@@ -139,7 +139,7 @@ public class GUI extends JFrame implements ActionListener {
 		quitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
 				ActionEvent.CTRL_MASK));
 		quitMenuItem.setIcon(new ImageIcon(getClass().getResource(
-				"icons/cross.png")));
+                "img/cross.png")));
 		quitMenuItem.addActionListener(this);
 		quitMenuItem.setActionCommand("file_quit");
 
@@ -160,7 +160,7 @@ public class GUI extends JFrame implements ActionListener {
 		cutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,
 				ActionEvent.CTRL_MASK));
 		cutMenuItem.setIcon(new ImageIcon(getClass().getResource(
-				"icons/cut.png")));
+                "img/cut.png")));
 		cutMenuItem.addActionListener(this);
 		cutMenuItem.setActionCommand("edit_cut");
 
@@ -170,7 +170,7 @@ public class GUI extends JFrame implements ActionListener {
 		copyMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
 				ActionEvent.CTRL_MASK));
 		copyMenuItem.setIcon(new ImageIcon(getClass().getResource(
-				"icons/page_copy.png")));
+                "img/page_copy.png")));
 		copyMenuItem.addActionListener(this);
 		copyMenuItem.setActionCommand("edit_copy");
 
@@ -180,7 +180,7 @@ public class GUI extends JFrame implements ActionListener {
 		pasteMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
 				ActionEvent.CTRL_MASK));
 		pasteMenuItem.setIcon(new ImageIcon(getClass().getResource(
-				"icons/page_paste.png")));
+                "img/page_paste.png")));
 		pasteMenuItem.addActionListener(this);
 		pasteMenuItem.setActionCommand("edit_paste");
 
@@ -200,13 +200,13 @@ public class GUI extends JFrame implements ActionListener {
 
         JMenuItem runMenuItem = new JMenuItem("Run");
         runMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.CTRL_MASK));
-        runMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/resultset_next.png")));
+        runMenuItem.setIcon(new ImageIcon(getClass().getResource("img/resultset_next.png")));
         runMenuItem.addActionListener(this);
         runMenuItem.setActionCommand("run_run");
 
         JMenuItem debugMenuItem = new JMenuItem("Debug");
         debugMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
-        debugMenuItem.setIcon(new ImageIcon(getClass().getResource("icons/wrench.png")));
+        debugMenuItem.setIcon(new ImageIcon(getClass().getResource("img/wrench.png")));
         debugMenuItem.addActionListener(this);
         debugMenuItem.setActionCommand("run_debug");
 
@@ -219,7 +219,7 @@ public class GUI extends JFrame implements ActionListener {
 		viewHelpMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,
 				ActionEvent.CTRL_MASK));
 		viewHelpMenuItem.setIcon(new ImageIcon(getClass().getResource(
-				"icons/help.png")));
+                "img/help.png")));
 		viewHelpMenuItem.addActionListener(this);
 		viewHelpMenuItem.setActionCommand("help_viewHelp");
 
@@ -227,7 +227,7 @@ public class GUI extends JFrame implements ActionListener {
 		aboutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
 				ActionEvent.CTRL_MASK));
 		aboutMenuItem.setIcon(new ImageIcon(getClass().getResource(
-				"icons/information.png")));
+                "img/information.png")));
 		aboutMenuItem.addActionListener(this);
 		aboutMenuItem.setActionCommand("help_about");
 
@@ -247,43 +247,43 @@ public class GUI extends JFrame implements ActionListener {
 
 		JButton newToolBarButton = new JButton("New");
 		newToolBarButton.setIcon(new ImageIcon(getClass().getResource(
-				"icons/page_add.png")));
+                "img/page_add.png")));
 		newToolBarButton.addActionListener(this);
 		newToolBarButton.setActionCommand("file_new");
 
 		JButton openToolBarButton = new JButton("Open");
 		openToolBarButton.setIcon(new ImageIcon(getClass().getResource(
-				"icons/folder_page.png")));
+                "img/folder_page.png")));
 		openToolBarButton.addActionListener(this);
 		openToolBarButton.setActionCommand("file_open");
 		
 		JButton closeToolBarButton = new JButton("Close");
 		closeToolBarButton.setIcon(new ImageIcon(getClass().getResource(
-				"icons/application_delete.png")));
+                "img/application_delete.png")));
 		closeToolBarButton.addActionListener(this);
 		closeToolBarButton.setActionCommand("file_close");
 
 		JButton saveToolBarButton = new JButton("Save");
 		saveToolBarButton.setIcon(new ImageIcon(getClass().getResource(
-				"icons/disk.png")));
+                "img/disk.png")));
 		saveToolBarButton.addActionListener(this);
 		saveToolBarButton.setActionCommand("file_save");
 		JButton saveAsToolBarButton = new JButton("Save As");
 		saveAsToolBarButton.setIcon(new ImageIcon(getClass().getResource(
-				"icons/page_save.png")));
+                "img/page_save.png")));
 		saveAsToolBarButton.addActionListener(this);
 		saveAsToolBarButton.setActionCommand("file_saveAs");
 
 		JButton printToolBarButton = new JButton("Print");
 		printToolBarButton.setIcon(new ImageIcon(getClass().getResource(
-				"icons/printer.png")));
+                "img/printer.png")));
 		printToolBarButton.addActionListener(this);
 		printToolBarButton.setActionCommand("file_print");
 
 		JButton cutToolBarButton = new JButton(new DefaultEditorKit.CutAction());
 		cutToolBarButton.setText("Cut");
 		cutToolBarButton.setIcon(new ImageIcon(getClass().getResource(
-				"icons/cut.png")));
+                "img/cut.png")));
 		cutToolBarButton.addActionListener(this);
 		cutToolBarButton.setActionCommand("edit_cut");
 
@@ -291,7 +291,7 @@ public class GUI extends JFrame implements ActionListener {
 				new DefaultEditorKit.CopyAction());
 		copyToolBarButton.setText("Copy");
 		copyToolBarButton.setIcon(new ImageIcon(getClass().getResource(
-				"icons/page_copy.png")));
+                "img/page_copy.png")));
 		copyToolBarButton.addActionListener(this);
 		copyToolBarButton.setActionCommand("edit_copy");
 
@@ -299,13 +299,13 @@ public class GUI extends JFrame implements ActionListener {
 				new DefaultEditorKit.PasteAction());
 		pasteToolBarButton.setText("Paste");
 		pasteToolBarButton.setIcon(new ImageIcon(getClass().getResource(
-				"icons/page_paste.png")));
+                "img/page_paste.png")));
 		pasteToolBarButton.addActionListener(this);
 		pasteToolBarButton.setActionCommand("edit_paste");
 
 		JButton runToolBarButton = new JButton("Run");
 		runToolBarButton.setIcon(new ImageIcon(getClass().getResource(
-				"icons/resultset_next.png")));
+                "img/resultset_next.png")));
         runToolBarButton.addActionListener(this);
         runToolBarButton.setActionCommand("run_run");
 
