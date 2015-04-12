@@ -345,6 +345,7 @@ public class GUI extends JFrame implements ActionListener {
 		this.consolePane = new JEditorPane();
         this.consolePane.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
         this.consolePane.setFont(new Font("Monaco", 0, 14));
+        this.consolePane.setEditable(false);
 
 		bottomTabbedPane.add(consolePane, "Console");
 
