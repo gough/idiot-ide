@@ -1,5 +1,4 @@
 public class Main {
-	
 	private static GUI gui;
 	
     public static void main(String[] args) {
@@ -11,10 +10,8 @@ public class Main {
         });
 
     }
-    public static GUI getGUI()
-    {
+
+    public static GUI getGUI() {
     	return gui;
     }
-    
 }
-
